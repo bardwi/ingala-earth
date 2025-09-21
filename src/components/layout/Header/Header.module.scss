@@ -1,0 +1,21 @@
+.wrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 56px;
+}
+.nav {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.spacer {
+  flex: 1;
+}
