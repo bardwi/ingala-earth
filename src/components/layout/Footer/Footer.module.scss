@@ -1,0 +1,15 @@
+.foot {
+  padding: 2rem 0;
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
