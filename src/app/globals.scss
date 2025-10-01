@@ -1,0 +1,32 @@
+@use '../styles/_variables' as *;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-work-sans), system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+  background: #f9f9f9;
+  color: #18191f;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --green-600: #{$green-600};
+  --container-max: 1160px;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+.container {
+  width: min(var(--container-max), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--lg {
+  --container-max: 1280px;
+}
+.container--xl {
+  --container-max: 1440px;
+}
