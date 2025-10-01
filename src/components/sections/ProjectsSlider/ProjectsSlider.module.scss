@@ -1,0 +1,108 @@
+@use '../../../styles/_variables' as *;
+
+.wrap {
+  padding: clamp(32px, 6vw, 72px) 0;
+  background: #fbf9f3;
+}
+
+.title {
+  font-family: var(--font-dm-serif, serif);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 44px);
+  color: #2d6b2d;
+  text-align: center;
+  margin-bottom: clamp(18px, 3vw, 32px);
+}
+
+/* Embla structure */
+.viewport {
+  overflow: hidden;
+}
+.container {
+  display: flex;
+}
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: clamp(8px, 2.2vw, 18px);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(16px, 3vw, 36px);
+  align-items: center;
+  border-radius: 10px;
+  padding: clamp(16px, 3vw, 24px);
+}
+
+/* media left */
+.media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.img {
+  object-fit: cover;
+}
+
+/* content right */
+.body {
+  padding-right: clamp(4px, 1vw, 8px);
+}
+.cardTitle {
+  font-family: var(--font-dm-serif, serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.25;
+  color: #2d6b2d;
+  margin: 0 0 8px;
+}
+.cardTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+.cardTitle a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.excerpt {
+  color: #40434a;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.readMore {
+  color: #0e3a66;
+  font-weight: 600;
+  text-decoration: none;
+}
+.readMore:hover {
+  text-decoration: underline;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: clamp(12px, 2vw, 18px);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #d6d6d6;
+  border: 0;
+}
+.dot.active {
+  background: #2d6b2d;
+}
+
+/* responsive */
+@media (max-width: 960px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+}
