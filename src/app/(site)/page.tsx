@@ -43,11 +43,6 @@ export default function Home() {
         ]}
         image={{ src: '/images/mission.png', alt: 'Field work' }}
       />
-      <section
-        id="mission"
-        className="container"
-        style={{ padding: '3rem 0 4rem' }}
-      ></section>
 
       <Expertise
         items={[
