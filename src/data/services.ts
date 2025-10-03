@@ -1,29 +1,54 @@
-import type { Service } from '@/types/content';
+export type ServiceSlug =
+  | 'agroecology'
+  | 'landscape-restoration'
+  | 'bio-labs'
+  | 'farmer-groups'
+  | 'learning-development';
 
-export const services: Service[] = [
+export type ServiceSummary = {
+  slug: ServiceSlug;
+  title: string;
+  blurb: string;
+  cardImg: { src: string; alt: string };
+};
+
+export const services: ServiceSummary[] = [
   {
-    slug: 'regenerative-agroecology-design',
+    slug: 'agroecology',
     title: 'Regenerative Agroecology Design',
-    excerpt: 'Designing resilient farms & landscapes.',
+    blurb:
+      'We design regenerative farms and landscapes by integrating permaculture, traditional knowledge, and whole-systems thinking.',
+    cardImg: {
+      src: '/services/agroecology.png',
+      alt: 'Regenerative landscape',
+    },
   },
   {
-    slug: 'landscape-level-restoration',
+    slug: 'landscape-restoration',
     title: 'Landscape-Level Restoration',
-    excerpt: 'Reviving degraded landscapes.',
+    blurb:
+      'We restore degraded lands—reconnecting ecosystems, regenerating soils, and recharging water systems.',
+    cardImg: { src: '/services/landscape.jpg', alt: 'Restored hillside' },
   },
   {
-    slug: 'agroecological-research-bio-labs',
+    slug: 'bio-labs',
     title: 'Agroecological Research & Bio Labs',
-    excerpt: 'Science-driven, farmer-led innovation.',
+    blurb:
+      'Science-driven solutions for soil health, natural inputs, and farmer-led innovation.',
+    cardImg: { src: '/services/labs.jpg', alt: 'Greenhouse & lab workspace' },
   },
   {
-    slug: 'empowering-farmer-groups',
+    slug: 'farmer-groups',
     title: 'Empowering Farmer Groups',
-    excerpt: 'Capacity building for co-ops/FPOs.',
+    blurb:
+      'Capacity building, strategic planning, and resilient support systems for cooperatives.',
+    cardImg: { src: '/services/groups.jpg', alt: 'Farmer group meeting' },
   },
   {
-    slug: 'education-and-training',
-    title: 'Education & Training',
-    excerpt: 'Courses & workshops in nature-based solutions.',
+    slug: 'learning-development',
+    title: 'Learning & Development',
+    blurb:
+      'Context-based learning that builds ecological literacy and climate resilience.',
+    cardImg: { src: '/services/learning.jpg', alt: 'Field training session' },
   },
 ];
