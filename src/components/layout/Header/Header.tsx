@@ -38,7 +38,7 @@ export default function Header() {
   return (
     <header className={`${s.wrap} ${solid ? s.solid : s.clear}`}>
       <div className={`container ${s.bar}`}>
-        {/* left: logo + burger (mobile) */}
+        {/* left- logo + burger (mobile) */}
         <div className={s.left}>
           <button
             className={s.menuBtn}
@@ -50,7 +50,7 @@ export default function Header() {
           <Logo size={80} />
         </div>
 
-        {/* center: nav */}
+        {/* center- nav */}
         <nav className={s.nav} aria-label="Main">
           <Link
             className={`${s.link} ${isActive('/', pathname) ? s.active : ''}`}
@@ -60,9 +60,15 @@ export default function Header() {
           </Link>
 
           <div className={s.drop}>
-            <button className={s.dropBtn}>
+            <Link
+              href="/services"
+              prefetch
+              className={`${s.dropBtn} ${
+                isActive('/services', pathname) ? s.active : ''
+              }`}
+            >
               Services <Icon name="chevron-down" />
-            </button>
+            </Link>
             <div className={s.panel}>
               {serviceItems.map((it) => (
                 <Link key={it.href} href={it.href} className={s.item}>
@@ -103,7 +109,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* right: CTA */}
+        {/* right- CTA */}
         <div className={s.right}>
           <Link href="/contact" className={s.cta}>
             Contact Us
