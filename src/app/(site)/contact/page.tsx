@@ -1,40 +1,123 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Hero from '@/components/marketing/Hero/Hero';
 import s from './Contact.module.scss';
-import { RiMailLine, RiPhoneLine, RiMapPin2Line } from 'react-icons/ri';
+import {
+  RiMailLine,
+  RiPhoneLine,
+  RiMapPin2Line,
+  RiCheckboxCircleLine,
+  RiErrorWarningLine,
+  RiCloseLine,
+} from 'react-icons/ri';
+
+type Toast = {
+  type: 'success' | 'error';
+  title: string;
+  msg: string;
+  canRetry?: boolean;
+} | null;
 
 export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
+  const [toast, setToast] = useState<Toast>(null);
+  const [lastPayload, setLastPayload] = useState<Record<string, string> | null>(
+    null
+  );
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // auto-hide toast
+  useEffect(() => {
+    if (!toast || toast.type !== 'success') return;
+    const id = setTimeout(() => setToast(null), 4000);
+    return () => clearTimeout(id);
+  }, [toast]);
+
+  async function send(payload: Record<string, string>) {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data: { ok?: boolean; error?: string } = await res
+      .json()
+      .catch(() => ({}));
+    return { ok: Boolean(res.ok && data.ok), error: data.error };
+  }
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submitting) return;
 
-    const fd = new FormData(e.currentTarget);
-    const name = String(fd.get('name') || '');
-    const phone = String(fd.get('phone') || '');
-    const email = String(fd.get('email') || '');
-    const subject = String(fd.get('subject') || 'Website Enquiry');
-    const message = String(fd.get('message') || '');
-
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : '',
-      '',
-      message,
-    ].filter(Boolean);
-
-    const mailto = `mailto:reachus@ingala.earth?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    const form = e.currentTarget as HTMLFormElement;
+    const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get('name') || ''),
+      phone: String(fd.get('phone') || ''),
+      email: String(fd.get('email') || ''),
+      subject: String(fd.get('subject') || 'Website Enquiry'),
+      message: String(fd.get('message') || ''),
+      website: String(fd.get('website') || ''), // honeypot
+    };
 
     setSubmitting(true);
-    window.location.href = mailto;
-    setTimeout(() => setSubmitting(false), 800);
+    setToast(null);
+    setLastPayload(payload);
+
+    try {
+      const { ok, error } = await send(payload);
+      if (ok) {
+        form.reset();
+        setToast({
+          type: 'success',
+          title: 'Message sent',
+          msg: 'Thanks! Your message has been sent. We’ll get back to you soon.',
+        });
+      } else {
+        setToast({
+          type: 'error',
+          title: 'Message not sent',
+          msg:
+            error ||
+            'Something went wrong while sending your message. You can try again or email us directly.',
+          canRetry: true,
+        });
+      }
+    } catch {
+      setToast({
+        type: 'error',
+        title: 'Network error',
+        msg: 'We could not reach the server. Please check your connection, try again, or email us directly.',
+        canRetry: true,
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function retrySend() {
+    if (!lastPayload || submitting) return;
+    setSubmitting(true);
+    try {
+      const { ok, error } = await send(lastPayload);
+      if (ok) {
+        setToast({
+          type: 'success',
+          title: 'Message sent',
+          msg: 'Thanks! Your message has been sent.',
+        });
+      } else {
+        setToast({
+          type: 'error',
+          title: 'Still not sent',
+          msg: error || 'Please try again in a moment or email us directly.',
+          canRetry: true,
+        });
+      }
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -106,7 +189,6 @@ export default function ContactPage() {
                 fill
                 sizes="(min-width: 1024px) 520px, 100vw"
                 className={s.img}
-                priority={false}
               />
             </div>
 
@@ -116,6 +198,15 @@ export default function ContactPage() {
                 <br />
                 Get in Touch!
               </h2>
+
+              {/* honeypot (hidden) */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                className={s.hp}
+              />
 
               <div className={s.row}>
                 <label className="sr-only" htmlFor="name">
@@ -164,6 +255,62 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Snackbar */}
+      {toast && (
+        <div
+          className={`${s.toast} ${
+            toast.type === 'success' ? s.toastSuccess : s.toastError
+          }`}
+          role={toast.type === 'error' ? 'alert' : 'status'}
+          aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
+        >
+          <div className={s.toastInner}>
+            <div className={s.toastIcon} aria-hidden>
+              {toast.type === 'success' ? (
+                <RiCheckboxCircleLine size={22} />
+              ) : (
+                <RiErrorWarningLine size={22} />
+              )}
+            </div>
+
+            <div className={s.toastContent}>
+              <div className={s.toastTitle}>{toast.title}</div>
+              <div className={s.toastMsg}>{toast.msg}</div>
+
+              {toast.type === 'error' && (
+                <div className={s.toastActions}>
+                  {toast.canRetry && (
+                    <button
+                      type="button"
+                      className={s.toastBtn}
+                      onClick={retrySend}
+                      disabled={submitting}
+                    >
+                      {submitting ? 'Retrying…' : 'Retry'}
+                    </button>
+                  )}
+                  <a
+                    href="mailto:reachus@ingala.earth?subject=Website%20Enquiry"
+                    className={s.toastBtnOutline}
+                  >
+                    Email us
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <button
+              type="button"
+              className={s.toastClose}
+              aria-label="Close"
+              onClick={() => setToast(null)}
+            >
+              <RiCloseLine size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

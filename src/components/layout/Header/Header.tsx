@@ -103,6 +103,7 @@ export default function Header() {
               alt: 'Green landscape',
             }}
             cta={{ label: 'Explore All services', href: '/services' }}
+            active={isActive('/services', pathname)}
           />
 
           <MegaMenu
@@ -116,6 +117,7 @@ export default function Header() {
               alt: 'Greenhouse',
             }}
             cta={{ label: 'Explore All Projects', href: '/projects' }}
+            active={isActive('/projects', pathname)}
           />
 
           <Link

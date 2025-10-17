@@ -63,8 +63,10 @@
   text-decoration: none;
 }
 .link:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
   text-underline-offset: 4px;
+  text-decoration-color: #f09d2e !important;
+  color: #f09d2e !important;
 }
 .active {
   color: #f09d2e;
@@ -149,6 +151,8 @@
 .nav a:hover,
 .item:hover {
   text-underline-offset: 4px;
+  color: #f09d2e !important;
+  text-decoration: underline;
 }
 
 .cta {
@@ -217,13 +221,14 @@
   padding: 0.25rem 0 0.5rem 0.75rem;
   gap: 0.25rem;
 }
-.ctaMobile {
+a.ctaMobile {
   margin-top: 0.75rem;
   display: inline-block;
   background: $green-600;
   color: #fff;
   padding: 0.6rem 1rem;
   border-radius: 999px;
+  width: 100px;
 }
 .scrim {
   position: fixed;

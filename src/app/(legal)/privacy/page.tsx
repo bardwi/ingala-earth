@@ -49,7 +49,6 @@ export default function PrivacyPage() {
         {/* JSON-LD for SEO */}
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 

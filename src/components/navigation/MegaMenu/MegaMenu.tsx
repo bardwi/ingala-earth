@@ -30,6 +30,7 @@ type MegaMenuProps = {
   variant?: 'cards' | 'serviceList' | 'projectsList';
   className?: string;
   sideImage?: { src: string; alt: string };
+  active?: boolean;
 };
 
 export default function MegaMenu({
@@ -41,6 +42,7 @@ export default function MegaMenu({
   variant = 'cards',
   className,
   sideImage,
+  active = false,
 }: MegaMenuProps) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
@@ -70,10 +72,11 @@ export default function MegaMenu({
     >
       <Link
         href={labelHref}
-        className={s.trigger}
+        className={`${s.trigger} ${active ? s.active : ''}`}
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls={id}
+        aria-current={active ? 'page' : undefined}
       >
         {label}
         <svg className={s.chev} viewBox="0 0 24 24" aria-hidden>

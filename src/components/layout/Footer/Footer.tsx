@@ -41,7 +41,7 @@ export default function Footer() {
           <ul className={s.list}>
             <li>
               <span className={s.k}>Phone:</span>{' '}
-              <a href="tel:1234567890">123-456-7890</a>
+              <a href="tel:1234567890">+91 8660568930</a>
             </li>
             <li>
               <span className={s.k}>Email:</span>{' '}

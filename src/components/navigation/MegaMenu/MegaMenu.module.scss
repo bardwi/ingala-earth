@@ -362,6 +362,14 @@
   text-decoration: none !important;
   font-weight: 600;
 }
+.active {
+  color: #f09d2e !important;
+  font-weight: 600 !important;
+}
+.active:hover {
+  color: #f09d2e;
+  text-decoration: underline !important;
+}
 .ctaPill:hover {
   background: #2c5232;
   cursor: pointer;

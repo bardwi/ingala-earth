@@ -1,0 +1,30 @@
+{
+  "version": "0.2",
+  "useGitignore": true,
+
+  "language": "en",
+  "ignorePaths": [
+    ".next/**",
+    "out/**",
+    "build/**",
+    "coverage/**",
+    "public/**",
+    "node_modules/**",
+    "**/*.min.*",
+    "**/*.lock",
+    "**/dist/**"
+  ],
+  "words": [
+    "Ingala",
+    "agroecology",
+    "permaculture",
+    "Uttarakhand",
+    "Meghalaya",
+    "Karnataka",
+    "Uzbekistan",
+    "Guatemala",
+    "Bengaluru",
+    "agroforestry",
+    "biochar"
+  ]
+}

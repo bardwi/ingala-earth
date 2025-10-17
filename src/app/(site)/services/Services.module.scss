@@ -96,7 +96,7 @@
   line-height: var(--lh);
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--lines);
+  line-clamp: var(--lines);
   overflow: hidden;
   min-height: calc(var(--lines) * var(--lh) * 1em);
 
