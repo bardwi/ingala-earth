@@ -35,7 +35,7 @@ export default function Home() {
       />
 
       <Mission
-        blurb="Catalyzing regenerative transformation by integrating whole systems thinking, ecological restoration, and permaculture-based design to create thriving landscapes and empowered communities."
+        blurb="Catalyzing regenerative transformation by integrating whole systems thinking, ecological restoration, and permaculture-based design to create thriving landscapes and empowered communities where biodiversity, ecosystem services, and human well-being are restored and celebrated in equal measure."
         items={[
           { title: 'Regenerative transformation' },
           { title: 'Ecological restoration' },

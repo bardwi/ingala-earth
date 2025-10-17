@@ -8,7 +8,6 @@
     sans-serif;
   color: #18191f;
   font-size: 16px;
-
   padding-inline: 16px;
   background: #fff;
   box-shadow: 0 8px 23px rgba(0, 0, 0, 0.03);
@@ -22,7 +21,7 @@
 
 .clear {
   background: rgba(255, 255, 255, 1);
-  backdrop-filter: blur(6px);
+  //backdrop-filter: blur(6px);
 }
 .solid {
   background: #fff;
@@ -149,7 +148,6 @@
 .link:hover,
 .nav a:hover,
 .item:hover {
-  text-decoration: underline;
   text-underline-offset: 4px;
 }
 

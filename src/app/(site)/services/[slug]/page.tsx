@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Hero from '@/components/marketing/Hero/Hero';
+import type { Metadata } from 'next';
 import { services } from '@/data/services';
 import s from './ServiceDetail.module.scss';
 import type { IconType } from 'react-icons';
+
 import {
   LuLeaf,
   LuDroplets,
@@ -12,7 +14,30 @@ import {
   LuPuzzle,
   LuGraduationCap,
   LuHandshake,
+  LuUserCheck,
+  LuFlaskConical,
+  LuLifeBuoy,
 } from 'react-icons/lu';
+
+const iconForStep = (title: string) => {
+  const t = title.toLowerCase();
+
+  // Learning & training flow
+  if (t.includes('understand') || t.includes('learner')) return LuUserCheck;
+  if (t.includes('experiential') || t.includes('field') || t.includes('lab'))
+    return LuFlaskConical;
+  if (t.includes('ongoing')) return LuLifeBuoy;
+
+  // Farmer-groups
+  if (t.includes('needs')) return LuClipboardList;
+  if (t.includes('capacity')) return LuPuzzle;
+  if (t.includes('hands-on')) return LuGraduationCap;
+  if (t.includes('support') || t.includes('review')) return LuHandshake;
+
+  // Fallback icon
+  return LuLeaf;
+};
+
 const DETAILS = {
   agroecology: {
     heroKicker:
@@ -21,32 +46,32 @@ const DETAILS = {
       'Creating productive, resilient, and regenerative farms, landscapes and communities using our expertise in permaculture design, rainwater harvesting, and soil regeneration.',
     methodology: {
       image: { src: '/services/agroecology-method.png', alt: 'Design plan' },
-      text: 'We use a permaculture-based, whole-systems approach that integrates soil, water, biodiversity, and stakeholder needs. Interventions are tailored to site and context—often combining watershed and rainwater strategies with soil regeneration.',
+      text: 'At Ingala Earth LLP, regenerative agroecological systems are designed using a permaculture based approach that integrates soil, water, biodiversity, and stakeholder needs into cohesive, resilient landscapes. As part of this process, permaculture design is typically applied holistically—however, clients may also choose to consult with us for specific services, such as watershed management and rainwater harvesting or soil regeneration strategies, depending on their priorities. Each intervention is tailored to the site and context, ensuring that ecological integrity and productivity are restored in alignment with the clients goals.',
     },
     features: [
       {
         icon: LuLeaf,
         title: 'Permaculture Design',
-        text: 'Design integrated, biodiverse, climate-resilient food systems.',
+        text: 'Bringing together natural patterns and scientific principles to design integrated food production systems that are productive, climate resilient and bio diverse.',
       },
       {
         icon: LuDroplets,
         title: 'Watershed & Rainwater',
-        text: 'Capture rain, recharge groundwater, and enhance water security.',
+        text: 'Integrated water management solutions that restore hydrology- capturing rain, recharging groundwater, and enhancing water security at farm and landscape scales.',
       },
       {
         icon: LuSprout,
         title: 'Soil Regeneration & Carbon',
-        text: 'Build organic matter, fertility, and lock carbon in soils.',
+        text: 'Restoring soil health through  regenerative practices that build organic matter, enhance fertility, and lock carbon into the ground, supporting both productivity and climate goals.',
       },
     ],
     approach: {
       points: [
-        'Observe & Assess — soils, slope, water flow, vegetation mapping, stakeholders',
-        'Design & Planning — zoning, maps, collaborative planning',
-        'Water & Soil Interventions — bunds, RWH systems, soil regeneration',
-        'Planting & Establishment — plantation design and implementation',
-        'Support & Monitoring — training and long-term impact support',
+        'Observe & Assess — Soil testing, slope analysis, water flow, vegetation mapping, stakeholder input',
+        'Design & Planning — Collaborative design using permaculture principles, zoning, and visual maps',
+        'Water & Soil Interventions — Build RWH systems and soil regeneration strategies',
+        'Planting & Establishment — Plantation design and implementation strategy',
+        'Support & Monitoring — Monitoring and evaluation, training, and long-term impact support',
       ],
       image: { src: '/services/agroecology-field.jpg', alt: 'Field photo' },
     },
@@ -56,7 +81,7 @@ const DETAILS = {
     heroKicker:
       'Securing biodiversity, ecological function, and long-term regeneration across degraded landscapes — restoring flow from ridgeline to root zone.',
     overview:
-      'We specialize in restoring or rehabilitating large-scale degraded or fragmented landscapes through integrated ecological design. Working with natural succession, hydrology, native biodiversity, and stakeholders, we help revive ecological integrity and build long-term resilience.',
+      'At Ingala Earth, we specialize in restoring/rehabilitating large scale degraded or fragmented landscapes through integrated ecological design. By working with natural succession, hydrology, native biodiversity and stakeholders we help revive ecological integrity and build long-term resilience. Whether it’s a forest edge, disturbed or degraded landscape , or agricultural transition zone - our work brings land back to life, system by system.',
     methodTitle: 'Our Landscape Restoration Process',
     methodology: {
       image: {
@@ -93,10 +118,13 @@ const DETAILS = {
       'Farmer Producer Organisations (FPOs) and smallholder cooperatives are the backbone of agriculture. We work directly with these groups to strengthen their internal systems—from participatory governance to ecological decision-making—helping them scale regenerative practices, improve livelihoods, and become self-sustaining ecosystems of change.',
     offer: {
       title: 'What We Offer',
-      image: { src: '/services/groups.jpg', alt: 'Farmer group' },
+      image: {
+        src: '/services/groups-farmer.jpg',
+        alt: 'farmer group meeting',
+      },
       items: [
         {
-          title: 'Focus Area • Capacity Building',
+          title: 'Capacity Building',
           text: 'Training on leadership, governance, accounting, and decision-making.',
         },
         {
@@ -192,7 +220,7 @@ const DETAILS = {
     heroKicker:
       'Equipping people with the knowledge, tools, and ethics to regenerate land and life.',
     overview:
-      'We believe transformation starts with learning. Through immersive Permaculture Design Courses (PDCs) and custom-designed workshops, we bring ecological literacy, systems thinking, and hands-on regenerative practices to farmers, students, educators, and changemakers.',
+      'We believe that transformation starts with learning. Through immersive Permaculture Design Courses (PDCs) and custom-designed workshops, we bring ecological literacy, systems thinking, and hands-on regenerative practices to farmers, students, educators, and changemakers. Our trainings combine traditional knowledge, practical skills, and participatory tools to inspire action and stewardship.',
     offer: {
       title: 'What We Offer',
       kicker: 'Offering',
@@ -242,6 +270,57 @@ const DETAILS = {
 
 type Slug = keyof typeof DETAILS;
 type Detail = (typeof DETAILS)[Slug];
+
+const isSlug = (s: string): s is Slug => s in DETAILS;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = params;
+
+  // Validate the slug
+  if (!isSlug(slug)) {
+    return {
+      title: 'Service not found',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const svc = services.find((s) => s.slug === slug) ?? null;
+  const detail: Detail | undefined = DETAILS[slug];
+
+  if (!svc || !detail) {
+    return {
+      title: 'Service not found',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const description = detail.overview.slice(0, 155);
+  const url = `/services/${slug}`;
+  const ogImage = '/og/default.jpg';
+
+  return {
+    title: svc.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: svc.title,
+      description,
+      url,
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: svc.title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
 type WhyBlock = Readonly<{
   why: Readonly<{
     title: string;
@@ -352,8 +431,10 @@ export default async function ServiceDetailPage({
           ) : hasMethodology(detail) ? (
             <>
               <h2 className={`${s.h2} ${s.h2Inset}`}>Design Methodology</h2>
+
               <div className={s.method}>
-                <div className={s.methodMedia}>
+                {/* Left: framed image */}
+                <figure className={s.methodMedia}>
                   <Image
                     src={detail.methodology.image.src}
                     alt={detail.methodology.image.alt}
@@ -361,8 +442,18 @@ export default async function ServiceDetailPage({
                     className={s.img}
                     sizes="(min-width: 980px) 520px, 100vw"
                   />
+                </figure>
+
+                {/* Right: copy with comfy line-length and paragraph breaks */}
+                <div className={s.methodCopy}>
+                  {detail.methodology.text
+                    .split(/(?<=\.)\s+(?=[A-Z])/g) // split on sentence end
+                    .map((para, i) => (
+                      <p key={i} className={s.methodText}>
+                        {para}
+                      </p>
+                    ))}
                 </div>
-                <p className={s.methodText}>{detail.methodology.text}</p>
               </div>
             </>
           ) : null}
@@ -371,15 +462,15 @@ export default async function ServiceDetailPage({
         {hasOffer(detail) && (
           <div className={s.processRow}>
             {/* left: image  */}
-            <div className={s.methodMedia}>
+            <figure className={s.offerMedia}>
               <Image
                 src={detail.offer.image.src}
                 alt={detail.offer.image.alt}
                 fill
                 className={s.img}
-                sizes="(min-width: 980px) 620px, 100vw"
+                sizes="(min-width: 1100px) 640px, (min-width: 740px) 55vw, 100vw"
               />
-            </div>
+            </figure>
 
             {/* right card */}
             <div className={s.processCard}>
@@ -433,16 +524,10 @@ export default async function ServiceDetailPage({
 
               {/** map titles to icons */}
               {(() => {
-                const stepIcons: Record<string, IconType> = {
-                  'Needs Assessment': LuClipboardList,
-                  'Custom Capacity Planning': LuPuzzle,
-                  'Hands-on Trainings': LuGraduationCap,
-                  'On-Ground Support & Review': LuHandshake,
-                };
                 return (
                   <ul className={s.stepsGrid}>
                     {detail.steps.items.map((st) => {
-                      const Icon = stepIcons[st.title] ?? LuLeaf;
+                      const Icon = iconForStep(st.title);
                       return (
                         <li key={st.title} className={s.step}>
                           <span className={s.stepIcon} aria-hidden>
@@ -480,13 +565,22 @@ export default async function ServiceDetailPage({
             <div className={s.approach}>
               <div className={s.approachCol}>
                 <div className={s.kickerRow}>
-                  <span className={s.kickerDot} />
+                  <span className={s.kickerBadge} aria-hidden>
+                    <LuLeaf size={16} />
+                  </span>
                   <h3 className={s.kicker}>Our Regenerative Design Approach</h3>
                 </div>
+
                 <ul className={s.pointList}>
-                  {detail.approach.points.map((pt) => (
-                    <li key={pt}>{pt}</li>
-                  ))}
+                  {detail.approach.points.map((pt) => {
+                    const [title, rest] = pt.split('—').map((t) => t.trim());
+                    return (
+                      <li key={pt} className={s.approachItem}>
+                        <div className={s.approachItemTitle}>{title}</div>
+                        {rest && <p className={s.approachItemText}>{rest}</p>}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 

@@ -1,0 +1,188 @@
+@use '../../../styles/_variables' as *;
+
+/* Brand palette */
+$ecru: #f3efe7;
+$ivory: #faf9f5;
+$beige: #eae3d2;
+$brown: #5b1d0f;
+$green-600: #386641;
+$green-500: #6a994e;
+$text: #373a3f;
+$muted: #5f5f5f;
+$rule: #efe7d9;
+
+.page {
+  background: $ivory;
+}
+
+/* Top band */
+.band {
+  background: $ecru;
+  border-bottom: 1px solid #e5dece;
+}
+.bandInner {
+  padding: clamp(32px, 6vw, 72px) 0 clamp(16px, 3vw, 28px);
+  text-align: center;
+}
+
+.h1 {
+  margin: 0;
+  color: $green-600;
+  font-family: var(--font-dm-serif, 'DM Serif Display', serif);
+  font-weight: 400;
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.15;
+}
+.updated {
+  margin: 8px 0 0;
+  color: $muted;
+  font-size: 0.95rem;
+}
+
+/* Container width */
+.narrow {
+  max-width: min(980px, 92vw);
+  margin-inline: auto;
+  padding: clamp(24px, 4vw, 42px) 0;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border: 1px solid $rule;
+  border-radius: 12px;
+  padding: clamp(16px, 2.2vw, 22px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  margin: 0 auto clamp(14px, 2vw, 18px);
+}
+
+/* Headings */
+.h2 {
+  margin: 0 0 10px;
+  color: $green-500;
+  font-family: var(--font-lora, 'Lora', serif);
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 20px);
+}
+
+/* Body & links */
+.body {
+  margin: 0;
+  color: $text;
+  line-height: 1.7;
+  font-size: 0.98rem;
+
+  a {
+    color: $green-500;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: $green-600;
+  }
+}
+
+/* Address */
+.addr {
+  margin: 0 0 10px;
+  color: $text;
+  line-height: 1.6;
+  font-style: normal;
+}
+.org {
+  color: $green-600;
+}
+
+/* Definition list as grid */
+.kv {
+  margin: 10px 0 0;
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  column-gap: 14px;
+  row-gap: 8px;
+  color: $text;
+  font-size: 0.98rem;
+
+  dt {
+    color: $muted;
+  }
+  dd {
+    margin: 0;
+  }
+}
+
+/* Inline list of emails with centered dot between */
+.inlineList {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .dot {
+    color: #c9c9c9;
+    padding: 0 6px;
+  }
+}
+
+/* Dotted bullet list */
+.dotList {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    padding-left: 14px;
+    margin: 6px 0;
+    color: $text;
+    line-height: 1.6;
+  }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #dadada;
+  }
+}
+
+/* Two-up grid */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 2.4vw, 22px);
+  margin: clamp(6px, 1vw, 10px) 0 clamp(12px, 2vw, 18px);
+}
+.divider {
+  height: 1px;
+  background: #efe7d9;
+  margin: 12px 0;
+  opacity: 0.9;
+}
+
+/* Note block */
+.note {
+  background: #f8f4ec;
+  border: 1px solid $rule;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: $text;
+  text-align: center;
+
+  a {
+    color: $green-600;
+    text-decoration: underline;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .kv {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}

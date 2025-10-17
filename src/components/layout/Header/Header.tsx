@@ -8,7 +8,9 @@ import Logo from '@/components/brand/Logo/Logo';
 
 import { services } from '@/data/services';
 import { projects } from '@/data/projects';
-
+import MegaMenu, {
+  type MegaItem,
+} from '@/components/navigation/MegaMenu/MegaMenu';
 export default function Header() {
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
@@ -21,24 +23,56 @@ export default function Header() {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
+  const serviceCards: MegaItem[] = services.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    blurb: s.blurb,
+    cardImg: s.cardImg,
+    iconId:
+      s.slug === 'agroecology'
+        ? 'leaf'
+        : s.slug === 'landscape-restoration'
+        ? 'map'
+        : s.slug === 'bio-labs'
+        ? 'lab'
+        : s.slug === 'farmer-groups'
+        ? 'group'
+        : 'book',
+  }));
+
+  const projectCards: MegaItem[] = useMemo(
+    () =>
+      projects.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        blurb: p.summary,
+        cardImg: { src: p.cover.src, alt: p.cover.alt ?? p.title },
+        iconId: /research/i.test(p.slug)
+          ? 'lab'
+          : /education|capacity/i.test(p.slug)
+          ? 'book'
+          : /landscape|rehabilitation/i.test(p.slug)
+          ? 'map'
+          : /regenerative|permaculture/i.test(p.slug)
+          ? 'leaf'
+          : 'group',
+      })),
+    []
+  );
+
   type NavItem = { href: string; title: string };
-
-  const serviceItems: NavItem[] = useMemo(
-    () =>
-      services.map((s) => ({ href: `/services/${s.slug}`, title: s.title })),
-    []
-  );
-
-  const projectItems: NavItem[] = useMemo(
-    () =>
-      projects.map((p) => ({ href: `/projects/${p.slug}`, title: p.title })),
-    []
-  );
+  const serviceItems: NavItem[] = services.map((svc) => ({
+    href: `/services/${svc.slug}`,
+    title: svc.title,
+  }));
+  const projectItems: NavItem[] = projects.map((p) => ({
+    href: `/projects/${p.slug}`,
+    title: p.title,
+  }));
 
   return (
     <header className={`${s.wrap} ${solid ? s.solid : s.clear}`}>
       <div className={`container ${s.bar}`}>
-        {/* left- logo + burger (mobile) */}
         <div className={s.left}>
           <button
             className={s.menuBtn}
@@ -50,7 +84,6 @@ export default function Header() {
           <Logo size={80} />
         </div>
 
-        {/* center- nav */}
         <nav className={s.nav} aria-label="Main">
           <Link
             className={`${s.link} ${isActive('/', pathname) ? s.active : ''}`}
@@ -59,45 +92,31 @@ export default function Header() {
             Home
           </Link>
 
-          <div className={s.drop}>
-            <Link
-              href="/services"
-              prefetch
-              className={`${s.dropBtn} ${
-                isActive('/services', pathname) ? s.active : ''
-              }`}
-            >
-              Services <Icon name="chevron-down" />
-            </Link>
-            <div className={s.panel}>
-              {serviceItems.map((it) => (
-                <Link key={it.href} href={it.href} className={s.item}>
-                  {it.title}
-                </Link>
-              ))}
-              <div className={s.sep} />
-              <Link href="/services" className={s.viewAll}>
-                View all services →
-              </Link>
-            </div>
-          </div>
+          <MegaMenu
+            label="Services"
+            labelHref="/services"
+            baseHref="/services"
+            items={serviceCards}
+            variant="serviceList"
+            sideImage={{
+              src: '/projects/hero-projects.png',
+              alt: 'Green landscape',
+            }}
+            cta={{ label: 'Explore All services', href: '/services' }}
+          />
 
-          <div className={s.drop}>
-            <button className={s.dropBtn}>
-              Projects <Icon name="chevron-down" />
-            </button>
-            <div className={s.panel}>
-              {projectItems.map((it) => (
-                <Link key={it.href} href={it.href} className={s.item}>
-                  {it.title}
-                </Link>
-              ))}
-              <div className={s.sep} />
-              <Link href="/projects" className={s.viewAll}>
-                View all projects →
-              </Link>
-            </div>
-          </div>
+          <MegaMenu
+            label="Projects"
+            labelHref="/projects"
+            baseHref="/projects"
+            items={projectCards}
+            variant="projectsList"
+            sideImage={{
+              src: '/projects/agroecology-research.jpg',
+              alt: 'Greenhouse',
+            }}
+            cta={{ label: 'Explore All Projects', href: '/projects' }}
+          />
 
           <Link
             className={`${s.link} ${
@@ -109,7 +128,6 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* right- CTA */}
         <div className={s.right}>
           <Link href="/contact" className={s.cta}>
             Contact Us
@@ -117,7 +135,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* mobile drawer */}
+      {/* mobile drawer unchanged */}
       <div
         className={`${s.drawer} ${mobileOpen ? s.open : ''}`}
         aria-hidden={!mobileOpen}

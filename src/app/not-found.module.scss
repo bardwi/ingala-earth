@@ -1,0 +1,36 @@
+@use '../styles/_variables' as *;
+
+.wrap {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(32px, 5vw, 48px) 16px;
+  background: #faf9f5;
+}
+.card {
+  width: min(720px, 92vw);
+  background: #fff;
+  border: 1px solid #efe7d9;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  text-align: center;
+}
+.h1 {
+  margin: 0;
+  color: #5b1d0f;
+  font-weight: 400;
+}
+.p {
+  color: #333;
+  margin: 8px 0 14px;
+}
+.ghost {
+  display: inline-block;
+  background: transparent;
+  color: #5b1d0f;
+  border: 2px solid #5b1d0f;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-decoration: none;
+}

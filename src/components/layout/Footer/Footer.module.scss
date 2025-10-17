@@ -1,7 +1,7 @@
 @use '../../../styles/_variables' as *;
 
 $beige: #eae3d2;
-$brown: #5b1d0f; // requested icon color
+$brown: #5b1d0f;
 $text: #373a3f;
 
 .wrap {
@@ -26,7 +26,7 @@ $text: #373a3f;
   margin: 0 0 0.6rem;
   font-weight: 600;
   font-size: 1rem;
-  color: $brown; // section headings in brand brown
+  color: $brown; //section headings in brand brown
 }
 
 .list {
@@ -98,6 +98,18 @@ $text: #373a3f;
   padding: 12px 0 18px;
   color: #6b6f76;
   font-size: 0.9rem;
+}
+
+.bottom a {
+  color: #6b6f76;
+  text-decoration: none;
+}
+.bottom a:hover {
+  color: $brown;
+  text-decoration: underline;
+}
+.sep {
+  opacity: 0.6;
 }
 
 /* Responsive */
