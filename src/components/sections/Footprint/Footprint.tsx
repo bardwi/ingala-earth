@@ -29,9 +29,40 @@ const WORLD_URL =
 const INDIA_STATES_URL = '/data/india_state_geo.json';
 
 // Countries we want to highlight fully
-const HIGHLIGHT_COUNTRIES = new Set(['South Africa', 'Guatemala']);
+const HIGHLIGHT_COUNTRIES = new Set([
+  'South Africa',
+  'Guatemala',
+  'Ghana',
+  'Uzbekistan',
+]);
 
-const HIGHLIGHT_INDIA_STATES = new Set(['nagaland', 'uttarakhand']);
+const COLOR = {
+  worldFill: '#e9e6e6',
+  worldStroke: '#9CA3AF',
+  countryFill: '#85AD72',
+  countryHover: '#518A36',
+
+  indiaFill: '#F09D2E',
+  indiaHover: '#D8871E',
+  indiaBorder: '#CBBFA8',
+};
+
+type Tip = {
+  text: string;
+  x: number;
+  y: number;
+  bg: string;
+} | null;
+
+const HIGHLIGHT_INDIA_STATES = new Set([
+  'nagaland',
+  'uttarakhand',
+  'maharashtra',
+  'andhra pradesh',
+  'karnataka',
+  'tamil nadu',
+  'meghalaya',
+]);
 
 const normalizeName = (s?: unknown) =>
   String(s ?? '')
@@ -46,8 +77,15 @@ const ALIASES: Record<string, string> = {
   uttarakhand: 'uttarakhand',
   'uttara khand': 'uttarakhand',
   uttarakhanda: 'uttarakhand',
-};
 
+  // extra resilience for common variations
+  andhrapradesh: 'andhra pradesh',
+  tamilnadu: 'tamil nadu',
+};
+const DISPLAY_LABEL: Record<string, string> = {
+  uttarakhand: 'Uttarakhand',
+  nagaland: 'Nagaland',
+};
 type WorldGeo = {
   rsmKey: string;
   properties: { name?: string } & Record<string, unknown>;
@@ -57,8 +95,6 @@ type IndiaGeo = {
   rsmKey: string;
   properties: { st_nm?: string } & Record<string, unknown>;
 };
-
-type Tip = { text: string; x: number; y: number } | null;
 
 export default function Footprint() {
   const [zoom, setZoom] = useState(1);
@@ -79,7 +115,8 @@ export default function Footprint() {
 
   const setTipFromEvent = (
     e: React.MouseEvent<SVGPathElement>,
-    text: string
+    text: string,
+    bg: string
   ) => {
     const rect = wrapRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -89,6 +126,7 @@ export default function Footprint() {
       text,
       x: clamp(x, 8, rect.width - 8),
       y: clamp(y, 8, rect.height - 8),
+      bg,
     });
   };
 
@@ -166,26 +204,36 @@ export default function Footprint() {
                   geographies.map((geo: WorldGeo) => {
                     const name = geo.properties.name ?? '';
                     const active = HIGHLIGHT_COUNTRIES.has(name);
+
                     return (
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
-                        fill={active ? '#85AD72' : '#e9e6e6'}
-                        stroke="#9CA3AF"
+                        fill={active ? COLOR.countryFill : COLOR.worldFill}
+                        stroke={COLOR.worldStroke}
                         strokeWidth={0.5}
                         style={{
-                          default: { outline: 'none' },
+                          default: {
+                            outline: 'none',
+                            cursor: active ? 'pointer' : 'default',
+                          },
                           hover: {
-                            fill: active ? '#518A36' : '#F1EBDD',
+                            fill: active ? COLOR.countryHover : COLOR.worldFill,
                             outline: 'none',
                           },
                           pressed: { outline: 'none' },
                         }}
-                        onMouseEnter={(e: React.MouseEvent<SVGPathElement>) =>
-                          setTipFromEvent(e, name)
+                        onMouseEnter={
+                          active
+                            ? (e: React.MouseEvent<SVGPathElement>) =>
+                                setTipFromEvent(e, name, COLOR.countryHover)
+                            : () => setTip(null)
                         }
-                        onMouseMove={(e: React.MouseEvent<SVGPathElement>) =>
-                          setTipFromEvent(e, name)
+                        onMouseMove={
+                          active
+                            ? (e: React.MouseEvent<SVGPathElement>) =>
+                                setTipFromEvent(e, name, COLOR.countryHover)
+                            : undefined
                         }
                         onMouseLeave={() => setTip(null)}
                       />
@@ -205,37 +253,41 @@ export default function Footprint() {
                       p.name ??
                       p.STATE ??
                       p.STATE_NAME) as string | undefined;
+
                     const pretty = raw ?? '';
                     const norm = normalizeName(raw);
                     const canonical = ALIASES[norm] ?? norm;
                     const active = HIGHLIGHT_INDIA_STATES.has(canonical);
 
+                    const labelBase = DISPLAY_LABEL[canonical] ?? pretty;
+                    const label = `${labelBase}, India`;
+
                     return (
                       <Geography
-                        key={geo.rsmKey}
+                        key={geo.rsmKey + '-border'}
                         geography={geo}
-                        fill={active ? '#85AD72' : 'none'}
-                        stroke={active ? '#85AD72' : 'none'}
-                        strokeWidth={active ? 0.8 : 0}
+                        fill={active ? COLOR.indiaFill : 'none'}
+                        stroke={COLOR.indiaBorder}
+                        strokeWidth={0.2}
                         style={{
                           default: active
-                            ? { outline: 'none' }
+                            ? { outline: 'none', cursor: 'pointer' }
                             : { outline: 'none', pointerEvents: 'none' },
                           hover: active
-                            ? { outline: 'none', fill: '#518A36' }
+                            ? { outline: 'none', fill: COLOR.indiaHover }
                             : undefined,
                           pressed: { outline: 'none' },
                         }}
                         onMouseEnter={
                           active
                             ? (e: React.MouseEvent<SVGPathElement>) =>
-                                setTipFromEvent(e, `${pretty}, India`)
+                                setTipFromEvent(e, label, COLOR.indiaHover)
                             : undefined
                         }
                         onMouseMove={
                           active
                             ? (e: React.MouseEvent<SVGPathElement>) =>
-                                setTipFromEvent(e, `${pretty}, India`)
+                                setTipFromEvent(e, label, COLOR.indiaHover)
                             : undefined
                         }
                         onMouseLeave={active ? () => setTip(null) : undefined}
@@ -249,7 +301,13 @@ export default function Footprint() {
           {tip && (
             <div
               className={s.tooltip}
-              style={{ left: tip.x, top: tip.y }}
+              style={
+                {
+                  left: tip.x,
+                  top: tip.y,
+                  '--tipBg': tip.bg,
+                } as React.CSSProperties & { ['--tipBg']?: string }
+              }
               role="status"
               aria-live="polite"
             >
