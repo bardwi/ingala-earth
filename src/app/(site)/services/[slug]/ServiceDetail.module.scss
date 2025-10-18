@@ -1,7 +1,10 @@
 @use '../../../../styles/_variables' as *;
+:root {
+  --gutter-sm: clamp(12px, 5vw, 22px);
+  --vspace-sm: clamp(18px, 6vw, 28px);
+}
 
 .wrap {
-  //background: #faf9f5;
   padding: clamp(32px, 6vw, 72px) 0 0;
 }
 
@@ -592,12 +595,53 @@
   }
 }
 @media (max-width: 760px) {
-  .featureGrid {
-    grid-template-columns: 1fr 1fr;
+  .centerHead,
+  .featureGrid,
+  .method,
+  .processRow,
+  .offerRow,
+  .approach,
+  .whyRow {
+    padding-inline: var(--gutter-sm);
+  }
+
+  /* add vertical margins between major sections */
+  .method,
+  .processRow,
+  .offerRow,
+  .approach,
+  .whyRow {
+    margin-block: var(--vspace-sm);
+  }
+
+  .band {
+    margin-top: calc(var(--vspace-sm) + 8px);
+    padding-block: var(--vspace-sm);
+  }
+
+  .processListItem,
+  .offerItem {
+    margin-top: 14px;
+  }
+
+  .approachMedia,
+  .offerMedia,
+  .methodMedia,
+  .whyMedia {
+    border-radius: 12px;
+    min-height: clamp(260px, 48vw, 360px);
   }
 }
 @media (max-width: 520px) {
   .featureGrid {
     grid-template-columns: 1fr;
+  }
+  :root {
+    --gutter-sm: clamp(14px, 6vw, 20px);
+  }
+
+  .h2,
+  .h2Inset {
+    margin-bottom: calc(var(--vspace-sm) - 8px);
   }
 }

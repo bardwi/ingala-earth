@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.scss';
 import { Work_Sans, DM_Serif_Display } from 'next/font/google';
 import ScrollTop from '@/components/navigation/ScrollTop/ScrollTop';
 import CookieBanner from '@/components/cookies/CookieBanner';
 import Analytics from '@/components/analytics/Analytics';
 import Script from 'next/script';
+import './globals.scss';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -15,10 +15,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ingala.earth'),
-  title: {
-    default: 'Ingala Earth',
-    template: '%s · Ingala Earth',
-  },
+  title: { default: 'Ingala Earth', template: '%s · Ingala Earth' },
   description: 'Regenerative agroecology, biodiversity & landscape restoration',
   manifest: '/manifest.webmanifest',
   icons: {
@@ -36,10 +33,7 @@ export const metadata: Metadata = {
     siteName: 'Ingala Earth',
     images: [{ url: '/og/default-og.png', width: 1200, height: 630 }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['/og/default-og.png'],
-  },
+  twitter: { card: 'summary_large_image', images: ['/og/default-og.png'] },
 };
 
 const workSans = Work_Sans({
@@ -64,10 +58,29 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${workSans.variable} ${dmSerif.variable}`}
-      suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
+      <head>
+        {/* Disable React DevTools in dev to avoid the "hook.js" async cleanup noise */}
+        {process.env.NODE_ENV === 'development' && (
+          <Script id="disable-react-devtools" strategy="beforeInteractive">
+            {`
+              (function () {
+                var hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+                if (!hook) return;
+                try {
+                  hook.inject = function () {};
+                  hook.isDisabled = true;
+                  hook.onCommitFiberRoot = function(){};
+                  hook.onCommitFiberUnmount = function(){};
+                } catch {}
+              })();
+            `}
+          </Script>
+        )}
+
+        {/* Default GA consent: denied (flip to granted in CookieBanner) */}
         <Script id="ga4-consent-default" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -75,7 +88,12 @@ export default function RootLayout({
             gtag('consent', 'default', { 'analytics_storage': 'denied' });
           `}
         </Script>
+      </head>
+
+      <body>
+        {/* Only initialize analytics if your CookieBanner has granted consent */}
         <Analytics />
+
         {children}
         <CookieBanner />
         <ScrollTop />

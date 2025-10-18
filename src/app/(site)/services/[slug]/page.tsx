@@ -38,6 +38,53 @@ const iconForStep = (title: string) => {
   return LuLeaf;
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  if (!isSlug(slug)) {
+    return {
+      title: 'Service not found',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const svc = services.find((s) => s.slug === slug) ?? null;
+  const detail = DETAILS[slug];
+
+  if (!svc || !detail) {
+    return {
+      title: 'Service not found',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const description = detail.overview.slice(0, 155);
+  const url = `/services/${slug}`;
+  const ogImage = '/og/default.jpg';
+
+  return {
+    title: svc.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: svc.title,
+      description,
+      url,
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: svc.title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
 const DETAILS = {
   agroecology: {
     heroKicker:
@@ -273,54 +320,6 @@ type Detail = (typeof DETAILS)[Slug];
 
 const isSlug = (s: string): s is Slug => s in DETAILS;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = params;
-
-  // Validate the slug
-  if (!isSlug(slug)) {
-    return {
-      title: 'Service not found',
-      robots: { index: false, follow: false },
-    };
-  }
-
-  const svc = services.find((s) => s.slug === slug) ?? null;
-  const detail: Detail | undefined = DETAILS[slug];
-
-  if (!svc || !detail) {
-    return {
-      title: 'Service not found',
-      robots: { index: false, follow: false },
-    };
-  }
-
-  const description = detail.overview.slice(0, 155);
-  const url = `/services/${slug}`;
-  const ogImage = '/og/default.jpg';
-
-  return {
-    title: svc.title,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      title: svc.title,
-      description,
-      url,
-      images: [{ url: ogImage, width: 1200, height: 630 }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: svc.title,
-      description,
-      images: [ogImage],
-    },
-  };
-}
-
 type WhyBlock = Readonly<{
   why: Readonly<{
     title: string;
@@ -333,7 +332,7 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
-/** Type guards for sections */
+/* Type guards for sections */
 function hasProcess(d: Detail): d is (typeof DETAILS)['landscape-restoration'] {
   return 'process' in d;
 }
@@ -360,13 +359,12 @@ function hasWhy(d: Detail): d is Detail & WhyBlock {
 export default async function ServiceDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await Promise.resolve(params);
-  const key = slug as Slug;
+  const { slug } = await params;
 
   const summary = services.find((svc) => svc.slug === slug) ?? null;
-  const detail = DETAILS[key];
+  const detail = DETAILS[slug as keyof typeof DETAILS];
 
   if (!summary || !detail) return notFound();
 

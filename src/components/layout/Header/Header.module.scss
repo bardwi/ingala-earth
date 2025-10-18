@@ -13,7 +13,6 @@
   box-shadow: 0 8px 23px rgba(0, 0, 0, 0.03);
   transition: border-color 0.18s ease, background 0.18s ease;
 }
-
 .wrap :where(a, a:visited) {
   color: inherit;
   font: inherit;
@@ -21,7 +20,6 @@
 
 .clear {
   background: rgba(255, 255, 255, 1);
-  //backdrop-filter: blur(6px);
 }
 .solid {
   background: #fff;
@@ -38,6 +36,8 @@
   max-width: 1200px;
   margin-inline: auto;
 }
+
+/* left/nav/right clusters */
 .left {
   display: flex;
   align-items: center;
@@ -48,15 +48,14 @@
   background: none;
   border: 0;
   padding: 0.4rem;
+  cursor: pointer;
 }
-
 .nav {
   display: none;
   align-items: center;
   gap: 1.5rem;
   justify-content: center;
 }
-
 .link {
   padding: 0.4rem 0.25rem;
   border-radius: 8px;
@@ -80,7 +79,7 @@
   justify-content: flex-end;
 }
 
-/* dropdowns (desktop) */
+/* desktop dropdown placeholders */
 .drop {
   position: relative;
 }
@@ -147,12 +146,64 @@
   text-decoration: none;
 }
 
+/* group (mobile) */
+.group {
+  margin-top: 8px;
+}
+.groupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.groupLink {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* toggle button + chevron */
+.expandBtn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e7e1d6;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.chev {
+  display: inline-grid;
+}
+
+/* simple columns */
+.col {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* animated collapsible panel (mobile) */
+.panelAnim {
+  /* the magic: animating auto-height using CSS grid */
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms ease;
+  will-change: grid-template-rows;
+}
+.openAnim {
+  grid-template-rows: 1fr;
+}
+.panelInner {
+  overflow: hidden;
+}
+
+/* hover colors */
 .link:hover,
 .nav a:hover,
 .item:hover {
   text-underline-offset: 4px;
-  color: #f09d2e !important;
-  text-decoration: underline;
+  color: #f09d2e;
 }
 
 .cta {
@@ -200,6 +251,7 @@
   background: none;
   border: 0;
   padding: 0.4rem;
+  cursor: pointer;
 }
 .drawerBody {
   display: flex;
@@ -215,12 +267,7 @@
 .drawerBody details {
   padding: 0.25rem 0;
 }
-.col {
-  display: flex;
-  flex-direction: column;
-  padding: 0.25rem 0 0.5rem 0.75rem;
-  gap: 0.25rem;
-}
+
 a.ctaMobile {
   margin-top: 0.75rem;
   display: inline-block;
@@ -250,11 +297,26 @@ a.ctaMobile {
     display: none;
   }
 }
+
+/* mobile-only behaviors + chevron rotation + side padding */
 @media (max-width: 959px) {
   .menuBtn {
     display: inline-flex;
   }
   .bar {
     grid-template-columns: auto 1fr auto;
+  }
+
+  /* drawer content */
+  .drawerBody {
+    padding-inline: max(16px, env(safe-area-inset-left));
+  }
+
+  /* rotate arrow when expanded (mobile only) */
+  .expandBtn[aria-expanded='true'] .chev {
+    transform: rotate(180deg);
+  }
+  .chev {
+    transition: transform 180ms ease;
   }
 }

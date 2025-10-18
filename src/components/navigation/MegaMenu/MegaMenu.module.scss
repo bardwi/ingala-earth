@@ -25,6 +25,11 @@
   transform: rotate(180deg);
 }
 
+a.trigger:hover {
+  text-decoration: underline;
+  color: #f09d2e !important;
+}
+
 /* Full-width panel right under the header */
 .panel {
   pointer-events: none;
@@ -228,7 +233,7 @@
   margin: 0;
 }
 
-/* ---------------- Projects (image-on-top list) ---------- */
+/* ---------------- Projects ---------- */
 .projectsWrap {
   display: grid;
   gap: 18px;

@@ -4,18 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import s from './Logo.module.scss';
 
-type Props = { size?: number };
-
-export default function Logo({ size = 80 }: Props) {
+export default function Logo({ size = 80 }: { size?: number }) {
   return (
     <Link href="/" className={s.logo} aria-label="Ingala Home">
       <Image
         src="/logo.png"
         alt="Ingala Earth"
-        width={80}
-        height={80}
+        width={size}
+        height="70"
         priority
-        style={{ width: size, height: 'auto' }}
       />
     </Link>
   );

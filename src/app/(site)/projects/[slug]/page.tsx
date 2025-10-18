@@ -363,6 +363,7 @@ export default async function ProjectDetailPage({
                     alt={planBlock.plan.alt}
                     fill
                     className={`${s.img} ${s.imgContain}`}
+                    sizes="(min-width: 740px) 680px, 94vw"
                   />
                 </div>
               </div>
@@ -385,6 +386,7 @@ export default async function ProjectDetailPage({
                     alt={detail.nagaland.before.alt}
                     fill
                     className={s.img}
+                    sizes="(min-width: 980px) 34vw, 100vw"
                   />
                 </div>
                 <div className={s.baItem}>
@@ -393,6 +395,8 @@ export default async function ProjectDetailPage({
                     alt={detail.nagaland.after.alt}
                     fill
                     className={s.img}
+                    sizes="189px"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -408,7 +412,14 @@ export default async function ProjectDetailPage({
               <ul className={s.strip}>
                 {detail.nagaland.people.map((p) => (
                   <li key={p.src} className={s.stripItem}>
-                    <Image src={p.src} alt={p.alt} fill className={s.img} />
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      className={s.img}
+                      sizes="189px"
+                      loading="lazy"
+                    />
                   </li>
                 ))}
               </ul>
@@ -428,6 +439,7 @@ export default async function ProjectDetailPage({
                     alt={detail.southAfrica.image.alt}
                     fill
                     className={s.img}
+                    sizes="(min-width: 980px) 520px, 100vw"
                   />
                 </div>
                 <div className={s.content}>
@@ -477,6 +489,7 @@ export default async function ProjectDetailPage({
                     alt={b.image.alt}
                     fill
                     className={s.img}
+                    sizes="(min-width: 980px) 520px, 100vw"
                   />
                 </div>
 
@@ -530,6 +543,8 @@ export default async function ProjectDetailPage({
                             alt={im.alt}
                             fill
                             className={`${s.img}`}
+                            sizes="(min-width: 1100px) 320px, (min-width: 768px) 33vw, 100vw"
+                            loading="lazy"
                           />
                         </li>
                       ))}
@@ -644,6 +659,8 @@ export default async function ProjectDetailPage({
                               alt={p.before.alt}
                               fill
                               className={s.img}
+                              sizes="(min-width: 980px) 50vw, 100vw"
+                              loading="lazy"
                             />
                           </div>
                           <div className={s.baCell}>
@@ -653,6 +670,7 @@ export default async function ProjectDetailPage({
                               alt={p.after.alt}
                               fill
                               className={s.img}
+                              sizes="(min-width: 1236px) 420px, (min-width: 648px) 34vw, 220px"
                             />
                           </div>
                         </div>

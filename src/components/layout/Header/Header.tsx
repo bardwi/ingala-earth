@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import s from './Header.module.scss';
 import Icon from '@/components/ui/Icon/Icon';
 import Logo from '@/components/brand/Logo/Logo';
@@ -11,16 +11,52 @@ import { projects } from '@/data/projects';
 import MegaMenu, {
   type MegaItem,
 } from '@/components/navigation/MegaMenu/MegaMenu';
+
 export default function Header() {
   const pathname = usePathname();
   const [solid, setSolid] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // mobile accordion state
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
+
+  // solid header on scroll
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 12);
     onScroll();
     addEventListener('scroll', onScroll, { passive: true });
     return () => removeEventListener('scroll', onScroll);
+  }, []);
+
+  // close drawer when route changes (e.g., when tapping a link)
+  useEffect(() => {
+    // close and reset panels on navigation
+    setMobileOpen(false);
+    setServicesOpen(false);
+    setProjectsOpen(false);
+  }, [pathname]);
+
+  const closeDrawer = useCallback(() => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+    setProjectsOpen(false);
+  }, []);
+
+  const toggleServices = useCallback(() => {
+    setServicesOpen((prev) => {
+      const next = !prev;
+      if (next) setProjectsOpen(false);
+      return next;
+    });
+  }, []);
+
+  const toggleProjects = useCallback(() => {
+    setProjectsOpen((prev) => {
+      const next = !prev;
+      if (next) setServicesOpen(false);
+      return next;
+    });
   }, []);
 
   const serviceCards: MegaItem[] = services.map((s) => ({
@@ -84,10 +120,12 @@ export default function Header() {
           <Logo size={80} />
         </div>
 
+        {/* Desktop nav */}
         <nav className={s.nav} aria-label="Main">
           <Link
             className={`${s.link} ${isActive('/', pathname) ? s.active : ''}`}
             href="/"
+            scroll={false}
           >
             Home
           </Link>
@@ -124,6 +162,7 @@ export default function Header() {
             className={`${s.link} ${
               isActive('/about', pathname) ? s.active : ''
             }`}
+            scroll={false}
             href="/about"
           >
             About Us
@@ -131,13 +170,13 @@ export default function Header() {
         </nav>
 
         <div className={s.right}>
-          <Link href="/contact" className={s.cta}>
+          <Link href="/contact" className={s.cta} scroll={false}>
             Contact Us
           </Link>
         </div>
       </div>
 
-      {/* mobile drawer unchanged */}
+      {/* Mobile drawer */}
       <div
         className={`${s.drawer} ${mobileOpen ? s.open : ''}`}
         aria-hidden={!mobileOpen}
@@ -147,58 +186,109 @@ export default function Header() {
           <button
             className={s.closeBtn}
             aria-label="Close menu"
-            onClick={() => setMobileOpen(false)}
+            onClick={closeDrawer}
           >
             <Icon name="close" size={22} />
           </button>
         </div>
+
         <div className={s.drawerBody}>
-          <Link href="/" onClick={() => setMobileOpen(false)}>
+          <Link href="/" onClick={closeDrawer}>
             Home
           </Link>
-          <details open>
-            <summary>Services</summary>
-            <div className={s.col}>
-              {serviceItems.map((it) => (
-                <Link
-                  key={it.href}
-                  href={it.href}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {it.title}
-                </Link>
-              ))}
+
+          {/* Services group */}
+          <div className={s.group}>
+            <div className={s.groupHeader}>
+              <Link
+                href="/services"
+                className={s.groupLink}
+                onClick={closeDrawer}
+              >
+                Services
+              </Link>
+              <button
+                type="button"
+                className={s.expandBtn}
+                aria-expanded={servicesOpen}
+                aria-controls="mobile-services-panel"
+                onClick={toggleServices}
+              >
+                <span className={s.chev} aria-hidden>
+                  <Icon name="chevron-down" size={18} />
+                </span>
+              </button>
             </div>
-          </details>
-          <details>
-            <summary>Projects</summary>
-            <div className={s.col}>
-              {projectItems.map((it) => (
-                <Link
-                  key={it.href}
-                  href={it.href}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {it.title}
-                </Link>
-              ))}
+
+            {/* animated height panel (mobile only) */}
+            <div
+              id="mobile-services-panel"
+              className={`${s.panelAnim} ${servicesOpen ? s.openAnim : ''}`}
+              hidden={!servicesOpen}
+            >
+              <div className={s.panelInner}>
+                <div className={s.col}>
+                  {serviceItems.map((it) => (
+                    <Link key={it.href} href={it.href} onClick={closeDrawer}>
+                      {it.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
-          </details>
-          <Link href="/about" onClick={() => setMobileOpen(false)}>
+          </div>
+
+          {/* Projects group */}
+          <div className={s.group}>
+            <div className={s.groupHeader}>
+              <Link
+                href="/projects"
+                className={s.groupLink}
+                onClick={closeDrawer}
+              >
+                Projects
+              </Link>
+              <button
+                type="button"
+                className={s.expandBtn}
+                aria-expanded={projectsOpen}
+                aria-controls="mobile-projects-panel"
+                onClick={toggleProjects}
+              >
+                <span className={s.chev} aria-hidden>
+                  <Icon name="chevron-down" size={18} />
+                </span>
+              </button>
+            </div>
+
+            <div
+              id="mobile-projects-panel"
+              className={`${s.panelAnim} ${projectsOpen ? s.openAnim : ''}`}
+              hidden={!projectsOpen}
+            >
+              <div className={s.panelInner}>
+                <div className={s.col}>
+                  {projectItems.map((it) => (
+                    <Link key={it.href} href={it.href} onClick={closeDrawer}>
+                      {it.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Link href="/about" onClick={closeDrawer}>
             About Us
           </Link>
-          <Link
-            href="/contact"
-            className={s.ctaMobile}
-            onClick={() => setMobileOpen(false)}
-          >
+
+          <Link href="/contact" className={s.ctaMobile} onClick={closeDrawer}>
             Contact Us
           </Link>
         </div>
       </div>
-      {mobileOpen && (
-        <div className={s.scrim} onClick={() => setMobileOpen(false)} />
-      )}
+
+      {mobileOpen && <div className={s.scrim} onClick={closeDrawer} />}
     </header>
   );
 }

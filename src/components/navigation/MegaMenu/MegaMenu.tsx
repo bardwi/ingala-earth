@@ -47,17 +47,31 @@ export default function MegaMenu({
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
   const id = useId();
+  const triggerRef = useRef<HTMLAnchorElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const openMenu = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
     setOpen(true);
   };
+
+  const closeMenuNow = () => {
+    setOpen(false);
+    // If focus is inside the panel, move it back to the trigger
+    if (panelRef.current?.contains(document.activeElement)) {
+      triggerRef.current?.focus();
+    }
+  };
+
   const closeMenuSoon = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => setOpen(false), 120);
   };
 
   useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMenuNow();
+    };
     window.addEventListener('keydown', onEsc);
     return () => window.removeEventListener('keydown', onEsc);
   }, []);
@@ -68,10 +82,15 @@ export default function MegaMenu({
       onMouseEnter={openMenu}
       onMouseLeave={closeMenuSoon}
       onFocus={openMenu}
-      onBlur={closeMenuSoon}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+          closeMenuSoon();
+      }}
     >
       <Link
+        ref={triggerRef}
         href={labelHref}
+        scroll={false}
         className={`${s.trigger} ${active ? s.active : ''}`}
         aria-haspopup="true"
         aria-expanded={open}
@@ -90,9 +109,10 @@ export default function MegaMenu({
       </Link>
 
       <div
+        ref={panelRef}
         id={id}
         role="menu"
-        aria-hidden={!open}
+        hidden={!open}
         className={`${s.panel} ${open ? s.open : ''}`}
       >
         <div className={s.inner}>
@@ -105,6 +125,7 @@ export default function MegaMenu({
                       href={`${baseHref}/${it.slug}`}
                       className={s.svcRow}
                       role="menuitem"
+                      tabIndex={open ? 0 : -1}
                     >
                       <span className={s.svcIcon} aria-hidden>
                         <ListIcon id={it.iconId ?? 'leaf'} />
@@ -148,6 +169,7 @@ export default function MegaMenu({
                       href={`${baseHref}/${it.slug}`}
                       className={s.projRow}
                       role="menuitem"
+                      tabIndex={open ? 0 : -1}
                     >
                       <div className={s.projThumb}>
                         <Image

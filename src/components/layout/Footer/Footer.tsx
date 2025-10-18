@@ -87,9 +87,13 @@ export default function Footer() {
         </div>
       </div>
       <div className={s.bottom}>
-        <Link href="/privacy">Privacy</Link>
+        <Link href="/privacy" scroll={false}>
+          Privacy
+        </Link>
         <span className={s.sep}> · </span>
-        <Link href="/imprint">Imprint</Link>
+        <Link href="/imprint" scroll={false}>
+          Imprint
+        </Link>
       </div>
 
       <div className={s.bottom}>© {year} Ingala · All Rights Reserved</div>
