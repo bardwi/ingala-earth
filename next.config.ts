@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
 
   output: 'standalone',
 
-  // Keep builds disciplined
   eslint: { dirs: ['src'] },
   // typescript: { ignoreBuildErrors: false },
 };
