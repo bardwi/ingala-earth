@@ -7,9 +7,11 @@ export default function NotFound() {
       <div className={s.card}>
         <h1 className={s.h1}>Page not found</h1>
         <p className={s.p}>The page you’re looking for doesn’t exist.</p>
-        <Link href="/" className={s.ghost}>
-          Back to Home
-        </Link>
+        <p>
+          <Link href="/" className={s.ghost}>
+            Back to Home
+          </Link>
+        </p>
       </div>
     </main>
   );

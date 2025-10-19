@@ -3,6 +3,7 @@ import { Work_Sans, DM_Serif_Display } from 'next/font/google';
 import ScrollTop from '@/components/navigation/ScrollTop/ScrollTop';
 import CookieBanner from '@/components/cookies/CookieBanner';
 import Analytics from '@/components/analytics/Analytics';
+import { Suspense } from 'react';
 import Script from 'next/script';
 import './globals.scss';
 
@@ -90,9 +91,10 @@ export default function RootLayout({
         </Script>
       </head>
 
-      <body>
-        {/* Only initialize analytics if your CookieBanner has granted consent */}
-        <Analytics />
+      <body suppressHydrationWarning>
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
 
         {children}
         <CookieBanner />
