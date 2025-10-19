@@ -48,7 +48,7 @@
   --thumb-h: clamp(160px, 22vw, 10px);
 
   display: grid;
-  grid-template-rows: var(--thumb-h) 1fr;
+  grid-template-rows: auto 1fr;
   border-radius: 12px;
   background: #fff;
   border: 1px solid #efe7d9;
@@ -57,7 +57,7 @@
 
 .media {
   position: relative;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 9;
   border-radius: 12px 12px 0 0;
   overflow: hidden;
 }
@@ -317,7 +317,7 @@
     max-width: 30rem;
   }
   .media {
-    aspect-ratio: 16 / 9;
+    min-height: 160px;
   }
 }
 
