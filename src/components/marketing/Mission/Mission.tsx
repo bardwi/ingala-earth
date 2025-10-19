@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import s from './Mission.module.scss';
+import { LuRecycle, LuLeaf, LuUsers } from 'react-icons/lu';
 
 type Item = { icon?: React.ReactNode; title: string; desc?: string };
 
@@ -18,6 +19,13 @@ export default function Mission({
   items,
   image,
 }: Props) {
+  const fallbackIcon = (label: string) => {
+    const t = label.toLowerCase();
+    if (t.includes('regenerative')) return <LuRecycle aria-hidden />;
+    if (t.includes('ecological')) return <LuLeaf aria-hidden />;
+    if (t.includes('community')) return <LuUsers aria-hidden />;
+    return <LuLeaf aria-hidden />;
+  };
   return (
     <section className={s.wrap} id="mission" aria-labelledby="mission-title">
       <div className="container container-lg">
@@ -33,7 +41,7 @@ export default function Mission({
               {items.map((it, i) => (
                 <li key={i} className={s.item}>
                   <span className={s.icon}>
-                    {it.icon ?? <span className={s.dot} />}
+                    {it.icon ?? fallbackIcon(it.title)}
                   </span>
                   <span className={s.text}>{it.title}</span>
                 </li>
@@ -46,8 +54,8 @@ export default function Mission({
             <Image
               src={image.src}
               alt={image.alt ?? ''}
-              width={image.width ?? 740}
-              height={image.height ?? 480}
+              width={image.width ?? 880}
+              height={image.height ?? 560}
               className={s.img}
               priority
             />

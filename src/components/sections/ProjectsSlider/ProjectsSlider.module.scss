@@ -1,17 +1,17 @@
 @use '../../../styles/_variables' as *;
 
 .wrap {
-  padding: clamp(32px, 6vw, 72px) 0;
+  padding: clamp(32px, 6vw, 72px) 0 clamp(72px, 8vw, 110px);
   background: #fbf9f3;
 }
 
 .title {
   font-family: var(--font-dm-serif, serif);
   font-weight: 400;
-  font-size: clamp(28px, 4vw, 44px);
-  color: #2d6b2d;
+  font-size: clamp(22px, 2.4vw, 28px);
+  color: #6a994e;
   text-align: center;
-  margin-bottom: clamp(18px, 3vw, 32px);
+  margin-bottom: clamp(28px, 3vw, 40px);
 }
 
 /* Embla structure */
@@ -56,7 +56,7 @@
   font-weight: 400;
   font-size: clamp(20px, 2.6vw, 28px);
   line-height: 1.25;
-  color: #2d6b2d;
+  color: #386641;
   margin: 0 0 8px;
 }
 .cardTitle a {
@@ -75,7 +75,7 @@
 }
 
 .readMore {
-  color: #0e3a66;
+  color: #1b4965;
   font-weight: 600;
   text-decoration: none;
 }
@@ -85,19 +85,26 @@
 
 .dots {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
+  align-items: center;
   margin-top: clamp(12px, 2vw, 18px);
 }
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #d6d6d6;
+  --size: 10px;
+  inline-size: var(--size);
+  block-size: var(--size);
+  padding: 0;
   border: 0;
+  border-radius: 50%;
+  background: #d6d6d6;
+  cursor: pointer;
+  line-height: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 .dot.active {
-  background: #2d6b2d;
+  background: #6a994e;
 }
 
 /* responsive */

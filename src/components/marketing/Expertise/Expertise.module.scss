@@ -1,8 +1,8 @@
 @use '../../../styles/_variables' as *;
 
 .wrap {
+  padding: clamp(32px, 6vw, 72px) 0 clamp(72px, 8vw, 110px);
   background: #efe8d9;
-  padding: clamp(48px, 7vw, 96px) 0;
   color: #18191f;
 }
 
@@ -10,18 +10,19 @@
   font-family: var(--font-dm-serif), 'DM Serif Display', serif;
   font-weight: 400;
   font-size: clamp(22px, 2.4vw, 28px);
-  color: #2f6b2f;
+  color: #6a994e;
   text-align: center;
   margin-bottom: clamp(28px, 3vw, 40px);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 2.6vw, 24px);
-  list-style: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 24px);
   padding: 0;
   margin: 0;
+  list-style: none;
+  justify-content: stretch;
 }
 
 .card {
@@ -29,8 +30,8 @@
   border: 1px solid #e8e6e2;
   border-radius: 8px;
   padding: 24px;
-  text-align: left;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  min-height: 180px;
 }
 
 .header {
@@ -52,10 +53,10 @@
 }
 
 .cardTitle {
-  font-family: var(--font-dm-serif), serif;
+  font-family: var(--font-lora, 'Lora', serif);
   font-size: 1rem;
   font-weight: 600;
-  color: #2f6b2f;
+  color: #386641;
   margin: 0;
 }
 
@@ -75,7 +76,7 @@
 .ctaRow {
   display: flex;
   justify-content: center;
-  margin-top: clamp(24px, 4vw, 36px);
+  margin-top: clamp(24px, 4vw, 40px);
 }
 
 .cta {
@@ -94,11 +95,14 @@
 
 @media (max-width: 960px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: 220px;
   }
 }

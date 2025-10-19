@@ -1,17 +1,27 @@
 'use client';
 
-export default function Error({
+import Header from '@/components/layout/Header/Header';
+import Footer from '@/components/layout/Footer/Footer';
+import ErrorView from '@/components/errors/ErrorView';
+
+export default function AppError({
   error,
   reset,
 }: {
-  error: Error;
+  error: Error & { digest?: string };
   reset: () => void;
 }) {
   return (
-    <div style={{ padding: '4rem' }}>
-      <h1>Something went wrong</h1>
-      <p>{error.message}</p>
-      <button onClick={() => reset()}>Try again</button>
-    </div>
+    <>
+      <Header />
+      <ErrorView
+        title="Something went wrong"
+        message={`${error.message}${
+          error.digest ? ` (ref: ${error.digest})` : ''
+        }`}
+        onRetry={() => reset()}
+      />
+      <Footer />
+    </>
   );
 }

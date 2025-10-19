@@ -1,9 +1,8 @@
-'use client';
-
-import Image from 'next/image';
 import Link from 'next/link';
 import s from './Hero.module.scss';
 import Icon from '@/components/ui/Icon/Icon';
+import Breadcrumbs from '@/components/navigation/Breadcrumbs/Breadcrumbs';
+import SmartImage from '@/components/ui/SmartImage/SmartImage';
 
 type CTA = {
   href: string;
@@ -47,19 +46,22 @@ export default function Hero({
   return (
     <section className={s.wrap} style={{ minHeight: minH }}>
       <div className={s.bg}>
-        <Image
+        <SmartImage
           src={image.src}
           alt={image.alt ?? ''}
           fill
           priority={!!image.priority}
           sizes="100vw"
-          className={s.img}
           style={{ objectPosition }}
+          wrapperClassName={s.bgImgWrap}
+          imgClassName={s.img}
+          skeleton={!image.priority}
+          placeholder={image.priority ? 'empty' : 'blur'}
         />
-        {/* soft color veil */}
+
         <div className={s.veil} />
       </div>
-
+      <Breadcrumbs variant="hero" homeLabel="Home" />
       <div className={`container ${s.content}`}>
         <h1 className={s.title}>{title}</h1>
         {subtitle ? <p className={s.subtitle}>{subtitle}</p> : null}

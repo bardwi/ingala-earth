@@ -32,7 +32,7 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: 'project-design-impact-in-action',
+    slug: 'permaculture-regenerative-transition',
     title: 'Project Design & Impact in Action',
     summary:
       'Experience implementing recent frameworks in diverse contexts — including permaculture-led transitions.',
