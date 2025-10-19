@@ -31,3 +31,21 @@ body {
 .container--xl {
   --container-max: 1440px;
 }
+a,
+button,
+summary {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+[role='button'] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  color: inherit;
+  border: 1px solid #e7e1d6;
+  border-radius: 8px;
+  outline: none;
+}
