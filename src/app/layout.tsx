@@ -19,6 +19,17 @@ export const metadata: Metadata = {
   title: { default: 'Ingala Earth', template: '%s · Ingala Earth' },
   description: 'Regenerative agroecology, biodiversity & landscape restoration',
   manifest: '/manifest.webmanifest',
+  alternates: { canonical: 'https://ingala.earth' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -37,9 +48,26 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://ingala.earth',
     siteName: 'Ingala Earth',
-    images: [{ url: '/og/default-og.png', width: 1200, height: 630 }],
+    title: 'Ingala Earth — Regenerative Design & Ecosystem Restoration',
+    description:
+      'We design resilient ecosystems rooted in permaculture and whole-systems thinking.',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/og/default-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ingala Earth regenerative landscape',
+      },
+    ],
   },
-  twitter: { card: 'summary_large_image', images: ['/og/default-og.png'] },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ingala Earth | Regenerative Design & Ecosystem Restoration',
+    description:
+      'Designing resilient ecosystems rooted in permaculture, traditional wisdom, and whole-systems thinking.',
+    images: ['/og/default-og.png'],
+  },
 };
 
 const workSans = Work_Sans({
