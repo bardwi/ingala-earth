@@ -24,6 +24,7 @@ function isTouchStart(ev: Event): ev is TouchEvent {
 // World countries (TopoJSON)
 const WORLD_URL =
   'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const DISPUTED_LINES_URL = '/data/ne_admin0_boundary_lines_disputed.json';
 
 // India states (GeoJSON; has "st_nm" for the state name)
 const INDIA_STATES_URL = '/data/india_state_geo.json';
@@ -94,6 +95,13 @@ type WorldGeo = {
 type IndiaGeo = {
   rsmKey: string;
   properties: { st_nm?: string } & Record<string, unknown>;
+};
+
+type GeoCtx<T> = { geographies: T[] };
+
+type LineGeo = {
+  rsmKey: string;
+  properties: Record<string, unknown>;
 };
 
 export default function Footprint() {
@@ -199,6 +207,7 @@ export default function Footprint() {
               }}
             >
               {/* WORLD */}
+
               <Geographies geography={WORLD_URL}>
                 {({ geographies }: { geographies: WorldGeo[] }) =>
                   geographies.map((geo: WorldGeo) => {
@@ -211,7 +220,7 @@ export default function Footprint() {
                         geography={geo}
                         fill={active ? COLOR.countryFill : COLOR.worldFill}
                         stroke={COLOR.worldStroke}
-                        strokeWidth={0.5}
+                        strokeWidth={0.3}
                         style={{
                           default: {
                             outline: 'none',
@@ -242,6 +251,23 @@ export default function Footprint() {
                 }
               </Geographies>
 
+              <Geographies geography={DISPUTED_LINES_URL}>
+                {({ geographies }: GeoCtx<LineGeo>) =>
+                  geographies.map((geo) => (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      fill="none"
+                      stroke={COLOR.worldStroke}
+                      strokeWidth={0.9}
+                      //strokeDasharray="5 2"
+                      vectorEffect="non-scaling-stroke"
+                      style={{ default: { pointerEvents: 'none' } }}
+                    />
+                  ))
+                }
+              </Geographies>
+
               {/* INDIA STATES */}
               <Geographies geography={INDIA_STATES_URL}>
                 {({ geographies }: { geographies: IndiaGeo[] }) =>
@@ -268,7 +294,7 @@ export default function Footprint() {
                         geography={geo}
                         fill={active ? COLOR.indiaFill : 'none'}
                         stroke={COLOR.indiaBorder}
-                        strokeWidth={0.2}
+                        strokeWidth={0.1}
                         style={{
                           default: active
                             ? { outline: 'none', cursor: 'pointer' }
