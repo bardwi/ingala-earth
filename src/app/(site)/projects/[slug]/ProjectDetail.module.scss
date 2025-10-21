@@ -649,13 +649,14 @@
   /* before/after cards stack nicely */
   .beforeAfter {
     grid-template-columns: 1fr;
-    gap: var(--vspace-xs);
-    margin-block: 12px var(--vspace-xs);
+    gap: 10px;
+    //margin-block: 12px var(--vspace-xs);
   }
   .baItem {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 12px;
+    aspect-ratio: 16 / 16;
+    border-radius: 12px !important;
+    background: transparent;
   }
   .baItem:last-child,
   .baItem:first-child {
@@ -667,11 +668,14 @@
   }
 
   .strip {
-    grid-template-columns: 1fr; /* single column stack */
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
   }
   .stripItem {
     height: clamp(240px, 58vw, 420px);
+  }
+  .imgContainSm {
+    object-fit: fill;
   }
 
   /* split sections collapse */
@@ -692,7 +696,7 @@
   }
   .planMedia {
     width: 100%;
-    height: clamp(260px, 58vw, 520px);
+    height: 600px;
   }
   .thumbGrid3 {
     grid-template-columns: 1fr 1fr;

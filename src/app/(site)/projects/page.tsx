@@ -89,7 +89,7 @@ const PROJECTS: Project[] = [
       {
         location:
           'Experience implementing recent frameworks in diverse contexts',
-        text: 'Explore our experience implemmenting recent frameworks in diverse contexts.',
+        text: 'Explore our experience implementing recent frameworks in diverse contexts.',
       },
     ],
     cta: {
