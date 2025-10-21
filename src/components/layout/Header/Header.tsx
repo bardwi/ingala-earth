@@ -29,7 +29,7 @@ export default function Header() {
     return () => removeEventListener('scroll', onScroll);
   }, []);
 
-  // close drawer when route changes (e.g., when tapping a link)
+  // close drawer when route changes
   useEffect(() => {
     // close and reset panels on navigation
     setMobileOpen(false);
