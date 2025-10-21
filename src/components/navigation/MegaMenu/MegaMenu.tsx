@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import s from './MegaMenu.module.scss';
 
 import {
@@ -49,6 +50,7 @@ export default function MegaMenu({
   const id = useId();
   const triggerRef = useRef<HTMLAnchorElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const openMenu = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
@@ -57,7 +59,6 @@ export default function MegaMenu({
 
   const closeMenuNow = () => {
     setOpen(false);
-    // If focus is inside the panel, move it back to the trigger
     if (panelRef.current?.contains(document.activeElement)) {
       triggerRef.current?.focus();
     }
@@ -75,6 +76,15 @@ export default function MegaMenu({
     window.addEventListener('keydown', onEsc);
     return () => window.removeEventListener('keydown', onEsc);
   }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+  const handleItemClick = () => {
+    requestAnimationFrame(() => setOpen(false));
+  };
+
+  const linkProps = { onClick: handleItemClick };
 
   return (
     <div
@@ -96,6 +106,7 @@ export default function MegaMenu({
         aria-expanded={open}
         aria-controls={id}
         aria-current={active ? 'page' : undefined}
+        onPointerDown={closeMenuNow}
       >
         {label}
         <svg className={s.chev} viewBox="0 0 24 24" aria-hidden>
@@ -112,7 +123,7 @@ export default function MegaMenu({
         ref={panelRef}
         id={id}
         role="menu"
-        hidden={!open}
+        aria-hidden={!open}
         className={`${s.panel} ${open ? s.open : ''}`}
       >
         <div className={s.inner}>
@@ -126,6 +137,7 @@ export default function MegaMenu({
                       className={s.svcRow}
                       role="menuitem"
                       tabIndex={open ? 0 : -1}
+                      {...linkProps}
                     >
                       <span className={s.svcIcon} aria-hidden>
                         <ListIcon id={it.iconId ?? 'leaf'} />
@@ -170,6 +182,7 @@ export default function MegaMenu({
                       className={s.projRow}
                       role="menuitem"
                       tabIndex={open ? 0 : -1}
+                      {...linkProps}
                     >
                       <div className={s.projThumb}>
                         <Image
@@ -224,6 +237,7 @@ export default function MegaMenu({
                   className={s.card}
                   role="menuitem"
                   tabIndex={open ? 0 : -1}
+                  {...linkProps}
                 >
                   <div className={s.thumb}>
                     <Image

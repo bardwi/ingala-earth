@@ -172,8 +172,9 @@ export default function ContactPage() {
               </div>
               <div className={s.cardDivider} />
               <address className={s.addr}>
-                Apt #2603, Anriya Dwelllington, No 1<br />
-                L.G Hall, RMV 2nd Stage, Dollars Colony
+                Apt No. 6203, Anriya Dwellington, No 1<br />
+                L.G Halli, RMV Extension 2nd Stage, Dollars Colony, Extension II
+                Stage
                 <br />
                 Bangalore, Karnataka, India – 560094
               </address>
