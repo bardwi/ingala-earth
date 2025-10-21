@@ -42,7 +42,7 @@ export default function CookieBanner() {
         contentStyle={{
           margin: '0 auto',
           maxWidth: '1020px',
-          padding: '12px 0',
+          padding: '12px 12px',
           lineHeight: 1.6,
           flex: '1 1 auto',
         }}
