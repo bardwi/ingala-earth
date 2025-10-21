@@ -437,7 +437,7 @@ export default async function ServiceDetailPage({
                     src={detail.methodology.image.src}
                     alt={detail.methodology.image.alt}
                     fill
-                    className={s.img}
+                    className={`${s.img} ${s.imgContain}`}
                     sizes="(min-width: 980px) 520px, 100vw"
                   />
                 </figure>

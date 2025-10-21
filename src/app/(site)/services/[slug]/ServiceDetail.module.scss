@@ -52,7 +52,10 @@
   object-fit: cover;
   border-radius: inherit;
 }
-
+.methodMedia .imgContain {
+  object-fit: contain;
+  //background: #fff;
+}
 .methodCopy {
   padding: clamp(6px, 0.8vw, 10px) 0;
   max-width: 66ch;

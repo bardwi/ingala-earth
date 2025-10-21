@@ -382,19 +382,19 @@ export default async function ProjectDetailPage({
               <div className={s.beforeAfter}>
                 <div className={s.baItem}>
                   <Image
-                    src={detail.nagaland.before.src}
-                    alt={detail.nagaland.before.alt}
+                    src={detail.nagaland!.before.src}
+                    alt={detail.nagaland!.before.alt}
                     fill
-                    className={s.img}
+                    className={`${s.img} ${s.imgContainSm}`}
                     sizes="(min-width: 980px) 34vw, 100vw"
                   />
                 </div>
                 <div className={s.baItem}>
                   <Image
-                    src={detail.nagaland.after.src}
-                    alt={detail.nagaland.after.alt}
+                    src={detail.nagaland!.after.src}
+                    alt={detail.nagaland!.after.alt}
                     fill
-                    className={s.img}
+                    className={`${s.img} ${s.imgContainSm}`}
                     sizes="189px"
                     loading="lazy"
                   />

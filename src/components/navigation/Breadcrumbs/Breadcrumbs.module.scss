@@ -63,3 +63,14 @@
     font-weight: 700;
   }
 }
+@media (max-width: 560px) {
+  .crumbs li:last-child > a,
+  .crumbs li:last-child > span {
+    display: inline-block;
+    max-width: 60vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+}
