@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: 'Ingala Earth',
     title: 'Ingala Earth — Regenerative Design & Ecosystem Restoration',
     description:
-      'We design resilient ecosystems rooted in permaculture and whole-systems thinking.',
+      'We design resilient ecosystems rooted in Permaculture and whole-systems thinking.',
     locale: 'en_US',
     images: [
       {

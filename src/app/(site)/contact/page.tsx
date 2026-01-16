@@ -124,7 +124,7 @@ export default function ContactPage() {
     <>
       <Hero
         image={{
-          src: '/hero/greenhouse.jpg',
+          src: '/hero/rainbow.jpg',
           alt: 'Greenhouse',
           position: 'center',
           priority: true,

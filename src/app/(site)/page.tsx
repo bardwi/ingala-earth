@@ -4,7 +4,7 @@ import Expertise from '@/components/marketing/Expertise/Expertise';
 import Icon from '@/components/ui/Icon/Icon';
 import ProjectsSlider from '@/components/sections/ProjectsSlider/ProjectsSlider';
 import type { ProjectCard } from '@/components/sections/ProjectsSlider/ProjectsSlider';
-
+import Link from 'next/link';
 import { projects } from '@/data/projects';
 import Footprint from '@/components/sections/Footprint/Footprint';
 
@@ -19,29 +19,34 @@ export default function Home() {
     <>
       <Hero
         image={{
-          src: '/hero/greenhouse.jpg',
+          src: '/hero/hero.jpg',
           alt: 'Greenhouse',
           position: 'center',
           priority: true,
         }}
         title="Catalyzing Regeneration & Resilience"
-        subtitle="Designing resilient landscapes rooted in permaculture and traditional wisdom."
+        subtitle="Designing resilient landscapes rooted in Permaculture and traditional wisdom."
         actions={[
-          { href: '/contact', label: 'Get Started', variant: 'ghost' },
+          // { href: '/contact', label: 'Get Started', variant: 'ghost' },
           { href: '/projects', label: 'View Projects', variant: 'primary' },
         ]}
         scrollToId="mission"
-        minH="84vh"
+        minH="75vh"
       />
 
       <Mission
-        blurb="Catalyzing regenerative transformation by integrating whole systems thinking, ecological restoration, and permaculture-based design to create thriving landscapes and empowered communities where biodiversity, ecosystem services, and human well-being are restored and celebrated in equal measure."
+        blurb="Regenerative transformation by integrating whole systems thinking, ecological restoration, and permaculture-based design to create thriving landscapes and empowered communities where biodiversity, ecosystem services, and human well-being are restored and celebrated in equal measure."
         items={[
           { title: 'Regenerative transformation' },
           { title: 'Ecological restoration' },
           { title: 'Community empowerment' },
         ]}
         image={{ src: '/images/mission.png', alt: 'Field work' }}
+        cta={
+          <Link href="/contact" className="btn btn-ghost">
+            Get Started
+          </Link>
+        }
       />
 
       <Expertise

@@ -90,10 +90,10 @@ const DETAILS = {
     heroKicker:
       'Where water, soil, and biodiversity come together to support resilient livelihoods.',
     overview:
-      'Creating productive, resilient, and regenerative farms, landscapes and communities using our expertise in permaculture design, rainwater harvesting, and soil regeneration.',
+      'Creating productive, resilient, and regenerative farms, landscapes and communities using our expertise in Permaculture design, rainwater harvesting, and soil regeneration.',
     methodology: {
       image: { src: '/services/agroecology-method.png', alt: 'Design plan' },
-      text: 'At Ingala Earth LLP, regenerative agroecological systems are designed using a permaculture based approach that integrates soil, water, biodiversity, and stakeholder needs into cohesive, resilient landscapes. As part of this process, permaculture design is typically applied holistically—however, clients may also choose to consult with us for specific services, such as watershed management and rainwater harvesting or soil regeneration strategies, depending on their priorities. Each intervention is tailored to the site and context, ensuring that ecological integrity and productivity are restored in alignment with the clients goals.',
+      text: 'At Ingala Earth LLP, regenerative agroecological systems are designed using a Permaculture based approach that integrates soil, water, biodiversity, and stakeholder needs into cohesive, resilient landscapes. As part of this process, Permaculture design is typically applied holistically—however, clients may also choose to consult with us for specific services, such as watershed management and rainwater harvesting or soil regeneration strategies, depending on their priorities. Each intervention is tailored to the site and context, ensuring that ecological integrity and productivity are restored in alignment with the clients goals.',
     },
     features: [
       {
@@ -115,7 +115,7 @@ const DETAILS = {
     approach: {
       points: [
         'Observe & Assess — Soil testing, slope analysis, water flow, vegetation mapping, stakeholder input',
-        'Design & Planning — Collaborative design using permaculture principles, zoning, and visual maps',
+        'Design & Planning — Collaborative design using Permaculture principles, zoning, and visual maps',
         'Water & Soil Interventions — Build RWH systems and soil regeneration strategies',
         'Planting & Establishment — Plantation design and implementation strategy',
         'Support & Monitoring — Monitoring and evaluation, training, and long-term impact support',
@@ -275,7 +275,7 @@ const DETAILS = {
       items: [
         {
           title: 'Permaculture Design Course',
-          text: 'Globally recognized certification in permaculture design, delivered through theory + practice modules.',
+          text: 'Globally recognized certification in Permaculture design, delivered through theory + practice modules.',
         },
         {
           title: 'Custom Workshops',
@@ -372,7 +372,7 @@ export default async function ServiceDetailPage({
     <>
       <Hero
         image={{
-          src: '/hero/greenhouse.jpg',
+          src: '/hero/rainbow.jpg',
           alt: 'Greenhouse',
           position: 'center',
         }}

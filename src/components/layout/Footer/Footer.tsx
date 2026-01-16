@@ -88,7 +88,7 @@ export default function Footer() {
       </div>
       <div className={s.bottom}>
         <Link href="/privacy" scroll={false}>
-          Privacy
+          Privacy Policy
         </Link>
         <span className={s.sep}> · </span>
         <Link href="/imprint" scroll={false}>
