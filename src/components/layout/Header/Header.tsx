@@ -110,13 +110,6 @@ export default function Header() {
     <header className={`${s.wrap} ${solid ? s.solid : s.clear}`}>
       <div className={`container ${s.bar}`}>
         <div className={s.left}>
-          <button
-            className={s.menuBtn}
-            aria-label="Open menu"
-            onClick={() => setMobileOpen(true)}
-          >
-            <Icon name="menu" size={22} />
-          </button>
           <Logo size={80} />
         </div>
 
@@ -137,7 +130,7 @@ export default function Header() {
             items={serviceCards}
             variant="serviceList"
             sideImage={{
-              src: '/projects/hero-projects.png',
+              src: '/services/circle-services.jpg',
               alt: 'Green landscape',
             }}
             cta={{ label: 'Explore All services', href: '/services' }}
@@ -151,7 +144,7 @@ export default function Header() {
             items={projectCards}
             variant="projectsList"
             sideImage={{
-              src: '/projects/agroecology-research.jpg',
+              src: '/projects/views.jpg',
               alt: 'Greenhouse',
             }}
             cta={{ label: 'Explore All Projects', href: '/projects' }}
@@ -173,6 +166,13 @@ export default function Header() {
           <Link href="/contact" className={s.cta} scroll={false}>
             Contact Us
           </Link>
+          <button
+            className={s.menuBtn}
+            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}
+          >
+            <Icon name="menu" size={22} />
+          </button>
         </div>
       </div>
 

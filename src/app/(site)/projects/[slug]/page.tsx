@@ -82,7 +82,7 @@ const DETAILS: Record<string, Detail> = {
     heroSubtitle:
       'Restoring over 1,500 acres of degraded land with climate-resilient agroforestry.',
     overview:
-      'We work with our clients and partners across the world to rehabilitate degraded landscapes using permaculture and agroecology principles. Impacts so far: 1,500+ acres restored, 1000+ farmers trained, and sustainable food systems established in partnership with local and international organizations.',
+      'We work with our clients and partners across the world to rehabilitate degraded landscapes using Permaculture and agroecology principles. Impacts so far: 1,500+ acres restored, 1000+ farmers trained, and sustainable food systems established in partnership with local and international organizations.',
     nagaland: {
       before: {
         src: '/projects/before-image.png',
@@ -175,7 +175,7 @@ const DETAILS: Record<string, Detail> = {
           alt: 'Field workshop with ECS staff and farmers',
         },
         paras: [
-          'In partnership with Eleutheros Christian Society (ECS), we are creating a community-rooted education program to build regenerative capacity across rural Nagaland. This initiative focuses on empowering tribal farmers, youth, and local institutions through hands-on training in permaculture design, soil regeneration, water management, biochar production, and sustainable livelihoods.',
+          'In partnership with Eleutheros Christian Society (ECS), we are creating a community-rooted education program to build regenerative capacity across rural Nagaland. This initiative focuses on empowering tribal farmers, youth, and local institutions through hands-on training in Permaculture design, soil regeneration, water management, biochar production, and sustainable livelihoods.',
           'Through a mix of field demonstrations, workshops, and the development of community-based resource persons, the program is helping shift traditional slash-and-burn practices toward long-term ecological stewardship.',
           'Rooted in the values of local autonomy and ecological literacy, this collaboration reflects our shared belief in people-powered transformation and place-based resilience.',
         ],
@@ -188,7 +188,7 @@ const DETAILS: Record<string, Detail> = {
           alt: 'Hands-on practical training session',
         },
         paras: [
-          'Ingala Earth partnered with Breath of Earth Foundation to create a comprehensive permaculture-based education program for their community partners in Guatemala and South Africa. This collaboration aimed to support grassroots organizations and local leaders in adopting regenerative practices to address climate vulnerability, soil degradation, and water scarcity.',
+          'Ingala Earth partnered with Breath of Earth Foundation to create a comprehensive Permaculture-based education program for their community partners in Guatemala and South Africa. This collaboration aimed to support grassroots organizations and local leaders in adopting regenerative practices to address climate vulnerability, soil degradation, and water scarcity.',
           'Our role involved designing learning modules that are both theoretically grounded and practically applicable, covering key themes such as soil regeneration, water harvesting, agroecological design, integrated land use, and ecosystem restoration.',
           'Through this partnership, we contributed to building a scalable and accessible learning framework that enables community organizations to train facilitators, engage farmers, and implement regenerative projects that are both locally relevant and globally informed.',
         ],
@@ -208,7 +208,7 @@ const DETAILS: Record<string, Detail> = {
         type: 'planGallery',
         title: 'Community Nutrition Garden — Nagaland, India',
         intro:
-          'At the Primary Health Centre in Longpang, Nagaland, we established a Community Nutrition Garden to support patient recovery, improve local nutrition, and demonstrate regenerative food production. Designed with permaculture principles, the garden grows diverse vegetables, herbs, and medicinal plants, linking healthcare with local food systems. Managed by community members, it also serves as a model for integrating nutrition, ecology, and community care in rural health infrastructure.',
+          'At the Primary Health Centre in Longpang, Nagaland, we established a Community Nutrition Garden to support patient recovery, improve local nutrition, and demonstrate regenerative food production. Designed with Permaculture principles, the garden grows diverse vegetables, herbs, and medicinal plants, linking healthcare with local food systems. Managed by community members, it also serves as a model for integrating nutrition, ecology, and community care in rural health infrastructure.',
         plan: {
           src: '/projects/garden-overview.jpg',
           alt: 'Community garden beds',
@@ -314,7 +314,7 @@ export default async function ProjectDetailPage({
       <div className={s.heroWrap}>
         <Hero
           image={{
-            src: '/projects/hero-projects.png',
+            src: '/projects/rainbow.png',
             alt: 'Misty green hills',
             position: 'center',
           }}

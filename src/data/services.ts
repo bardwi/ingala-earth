@@ -19,7 +19,7 @@ export const services: ServiceSummary[] = [
     title: 'Regenerative Agroecology Design',
     eyebrow: 'Designing Resilient Ecosystems',
     blurb:
-      'We design regenerative farms and landscapes by integrating permaculture, traditional knowledge, and whole-systems thinking.',
+      'We design regenerative farms and landscapes by integrating Permaculture, traditional knowledge, and whole-systems thinking.',
     cardImg: {
       src: '/services/agroecology.png',
       alt: 'Regenerative landscape',
