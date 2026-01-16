@@ -11,6 +11,7 @@ type Props = {
   blurb: string;
   items: Item[];
   image: { src: string; alt?: string; width?: number; height?: number };
+  cta?: React.ReactNode;
 };
 
 export default function Mission({
@@ -18,6 +19,7 @@ export default function Mission({
   blurb,
   items,
   image,
+  cta,
 }: Props) {
   const fallbackIcon = (label: string) => {
     const t = label.toLowerCase();
@@ -61,6 +63,7 @@ export default function Mission({
             />
           </div>
         </div>
+        {cta ? <div className={s.cta}>{cta}</div> : null}
       </div>
     </section>
   );

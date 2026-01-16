@@ -17,12 +17,12 @@ export default function ServicesPage() {
     <>
       <Hero
         image={{
-          src: '/hero/greenhouse.jpg',
+          src: '/hero/rainbow.jpg',
           alt: 'Greenhouse',
           position: 'center',
         }}
         title="Our Services"
-        subtitle="Designing resilient ecosystems rooted in permaculture, traditional wisdom, and whole-systems thinking"
+        subtitle="Designing resilient ecosystems rooted in Permaculture, traditional wisdom, and whole-systems thinking"
         actions={[]}
         minH="56vh"
       />

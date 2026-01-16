@@ -36,7 +36,7 @@ export default function AboutPage() {
     <>
       <Hero
         image={{
-          src: '/hero/greenhouse.jpg',
+          src: '/hero/hero.jpg',
           alt: 'Greenhouse with plants',
           position: 'center',
           priority: true,

@@ -21,7 +21,10 @@ const PROJECTS: Project[] = [
   {
     title: 'Agroecology & Landscape Rehabilitation',
     stripe: 'green',
-    image: { src: '/projects/agroecology.png', alt: 'Green hillside farm' },
+    image: {
+      src: '/projects/agroecology-landscape-rehabilitation.jpg',
+      alt: 'Green hillside farm',
+    },
     bullets: [
       {
         location: 'Nagaland, India, Various Organisation',
@@ -29,7 +32,7 @@ const PROJECTS: Project[] = [
       },
       {
         location: 'Multiple Farms — Across India',
-        text: 'Offering permaculture consulting to help farms shift from conventional to regenerative systems—integrating soil health, water harvesting, agroforestry, biodiversity enhancement, and low-input farming techniques.',
+        text: 'Offering Permaculture consulting to help farms shift from conventional to regenerative systems—integrating soil health, water harvesting, agroforestry, biodiversity enhancement, and low-input farming techniques.',
       },
       {
         location: 'TERAGRN — South Africa',
@@ -45,7 +48,10 @@ const PROJECTS: Project[] = [
   {
     title: 'Agroecology Research',
     stripe: 'orange',
-    image: { src: '/projects/research.jpg', alt: 'Grass and research plots' },
+    image: {
+      src: '/projects/agroecology-research.jpg',
+      alt: 'Grass and research plots',
+    },
     bullets: [
       {
         location: 'Uttarakhand, India, SankalpTaru Foundation',
@@ -104,14 +110,14 @@ export default function ProjectsPage() {
     <>
       <Hero
         image={{
-          src: '/projects/hero-projects.png',
+          src: '/hero/rainbow.jpg',
           alt: 'Misty green hills',
           position: 'center',
         }}
         title="Our Projects Across Landscapes"
         subtitle="We are proud to work across diverse landscapes and communities, bringing regenerative solutions tailored to local needs."
         actions={[]}
-        minH="48vh"
+        minH="56vh"
       />
 
       <section className={s.wrap}>

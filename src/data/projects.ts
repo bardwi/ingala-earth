@@ -27,7 +27,7 @@ export const projects: Project[] = [
     summary:
       'Hands-on trainings and tailored curricula that build local capacity in regenerative agriculture and ecological restoration.',
     cover: {
-      src: '/projects/education-capacity-nature-based-solutions.jpg',
+      src: '/projects/education.jpg',
       alt: 'Field training session with community participants',
     },
   },
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     summary:
       'Experience implementing recent frameworks in diverse contexts — including permaculture-led transitions.',
     cover: {
-      src: '/projects/project-design-impact-in-action.jpg',
+      src: '/projects/project-design.png',
       alt: 'Project design & impact overview',
     },
   },
