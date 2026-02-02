@@ -3,6 +3,7 @@ import { Work_Sans, DM_Serif_Display } from 'next/font/google';
 import ScrollTop from '@/components/navigation/ScrollTop/ScrollTop';
 import CookieBanner from '@/components/cookies/CookieBanner';
 import Analytics from '@/components/analytics/Analytics';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next';
 import { Suspense } from 'react';
 import Script from 'next/script';
 import './globals.scss';
@@ -132,6 +133,7 @@ export default function RootLayout({
         {children}
         <CookieBanner />
         <ScrollTop />
+        <VercelAnalytics />
       </body>
     </html>
   );
