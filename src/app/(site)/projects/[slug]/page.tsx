@@ -322,14 +322,15 @@ export default async function ProjectDetailPage({
             slug === 'agroecology-research'
               ? 'Agroecology Research'
               : slug === 'permaculture-regenerative-transition'
-              ? 'Permaculture & Regenerative Transition'
-              : slug === 'education-capacity-nature-based-solutions'
-              ? 'Education & Capacity Building in Nature-Based Solutions'
-              : 'Agroecology & Landscape Rehabilitation'
+                ? 'Permaculture & Regenerative Transition'
+                : slug === 'education-capacity-nature-based-solutions'
+                  ? 'Education & Capacity Building in Nature-Based Solutions'
+                  : 'Agroecology & Landscape Rehabilitation'
           }
           subtitle={detail.heroSubtitle}
           actions={[]}
           minH="60vh"
+          photoCredit="Photo credit: Thingsol Songtom"
         />
         {hasImpact && (
           <div className={s.heroOverlay}>

@@ -25,6 +25,7 @@ export default function ServicesPage() {
         subtitle="Designing resilient ecosystems rooted in Permaculture, traditional wisdom, and whole-systems thinking"
         actions={[]}
         minH="56vh"
+        photoCredit="Photo credit: Thingsol Songtom"
       />
 
       <section className={s.offerWrap} aria-labelledby="offer-title">

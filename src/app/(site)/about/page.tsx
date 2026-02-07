@@ -45,6 +45,7 @@ export default function AboutPage() {
         subtitle="The people behind Ingala Earth’s regenerative vision"
         actions={[]}
         minH="56vh"
+        photoCredit="Photo credit: Thingsol Songtom"
       />
 
       <section className={`container ${s.wrap}`} aria-labelledby="team-title">
