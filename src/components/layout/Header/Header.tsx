@@ -68,12 +68,12 @@ export default function Header() {
       s.slug === 'agroecology'
         ? 'leaf'
         : s.slug === 'landscape-restoration'
-        ? 'map'
-        : s.slug === 'bio-labs'
-        ? 'lab'
-        : s.slug === 'farmer-groups'
-        ? 'group'
-        : 'book',
+          ? 'map'
+          : s.slug === 'bio-labs'
+            ? 'lab'
+            : s.slug === 'farmer-groups'
+              ? 'group'
+              : 'book',
   }));
 
   const projectCards: MegaItem[] = useMemo(
@@ -86,14 +86,14 @@ export default function Header() {
         iconId: /research/i.test(p.slug)
           ? 'lab'
           : /education|capacity/i.test(p.slug)
-          ? 'book'
-          : /landscape|rehabilitation/i.test(p.slug)
-          ? 'map'
-          : /regenerative|permaculture/i.test(p.slug)
-          ? 'leaf'
-          : 'group',
+            ? 'book'
+            : /landscape|rehabilitation/i.test(p.slug)
+              ? 'map'
+              : /regenerative|permaculture/i.test(p.slug)
+                ? 'leaf'
+                : 'group',
       })),
-    []
+    [],
   );
 
   type NavItem = { href: string; title: string };
@@ -130,7 +130,7 @@ export default function Header() {
             items={serviceCards}
             variant="serviceList"
             sideImage={{
-              src: '/services/circle-services.jpg',
+              src: '/services/circle_services.jpeg',
               alt: 'Green landscape',
             }}
             cta={{ label: 'Explore All services', href: '/services' }}

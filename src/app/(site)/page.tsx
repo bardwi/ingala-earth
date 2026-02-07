@@ -32,6 +32,7 @@ export default function Home() {
         ]}
         scrollToId="mission"
         minH="75vh"
+        photoCredit="Photo credit: Thingsol Songtom"
       />
 
       <Mission
@@ -41,12 +42,12 @@ export default function Home() {
           { title: 'Ecological restoration' },
           { title: 'Community empowerment' },
         ]}
-        image={{ src: '/images/mission.png', alt: 'Field work' }}
-        cta={
-          <Link href="/contact" className="btn btn-ghost">
-            Get Started
-          </Link>
-        }
+        image={{ src: '/images/mission.jpeg', alt: 'Field work' }}
+        // cta={
+        //   <Link href="/contact" className="btn btn-ghost">
+        //     Get Started
+        //   </Link>
+        // }
       />
 
       <Expertise
