@@ -314,7 +314,7 @@ export default async function ProjectDetailPage({
       <div className={s.heroWrap}>
         <Hero
           image={{
-            src: '/hero/rainbow.jpg',
+            src: '/projects/hero-projects.jpg',
             alt: 'Misty green hills',
             position: 'center',
           }}

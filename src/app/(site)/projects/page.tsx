@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Hero from '@/components/marketing/Hero/Hero';
 import s from './Projects.module.scss';
-import { LuArrowRight, LuMapPin } from 'react-icons/lu';
+import Link from 'next/link';
 
 type Bullet = {
   location?: string;
@@ -27,8 +27,8 @@ const PROJECTS: Project[] = [
     },
     bullets: [
       {
-        location: 'Nagaland, India, Various Organisation',
-        text: 'Permaculture based Agroforestry in 1500 acres for tribal farmers in Nagaland supported by Philanthropic funds and Government Grants.',
+        location: 'Nagaland, Rest of India, South Africa',
+        text: 'Design and implementation of agroecology and agroforestry systems at landscape scale, integrating soil regeneration, water management, and biodiversity restoration.',
       },
       {
         location: 'Multiple Farms — Across India',
@@ -54,8 +54,8 @@ const PROJECTS: Project[] = [
     },
     bullets: [
       {
-        location: 'Uttarakhand, India, SankalpTaru Foundation',
-        text: 'Designing an agroecology-based research and demonstration site at the Peepal Research Centre, focusing on soil health, biodiversity, water conservation, and climate resilience.',
+        location: 'Uttarrakhand, Nagaland',
+        text: 'Applied research and demonstration sites focused on soil health, biodiversity, water conservation, and regenerative farming practices.',
       },
       {
         location: 'Eleutheros Christian Society (ECS) — Nagaland, India',
@@ -71,8 +71,8 @@ const PROJECTS: Project[] = [
     image: { src: '/projects/education.jpg', alt: 'Teaching materials' },
     bullets: [
       {
-        location: 'Nagaland, India, Elutheorus Christian Society',
-        text: 'With ECS, we’re training farmers, youth, and staff in regenerative farming, agroecology, and bioresource manufacturing to build local capacity and ecological resilience in Nagaland.',
+        location: 'Nagaland, South Africa, Guatemala',
+        text: 'Capacity-building programs for farmers, youth, and community institutions focused on agroecology, regenerative agriculture, and nature-based livelihoods.',
       },
 
       {
@@ -90,12 +90,14 @@ const PROJECTS: Project[] = [
   {
     title: 'Project Design & Impact in Action',
     stripe: 'orange',
-    image: { src: '/projects/project-design.png', alt: 'Aerial project grid' },
+    image: {
+      src: '/projects/rainwater-harvest-two.jpg',
+      alt: 'Aerial project grid',
+    },
     bullets: [
       {
-        location:
-          'Experience implementing recent frameworks in diverse contexts',
-        text: 'Explore our experience implementing recent frameworks in diverse contexts.',
+        location: 'India, Multi-regional Contexts',
+        text: 'Design and implementation of regenerative project frameworks supporting planning, execution, and ecological and social impact tracking.',
       },
     ],
     cta: {
@@ -110,7 +112,7 @@ export default function ProjectsPage() {
     <>
       <Hero
         image={{
-          src: '/hero/rainbow.jpg',
+          src: '/projects/hero-projects.jpg',
           alt: 'Misty green hills',
           position: 'center',
         }}
@@ -121,9 +123,20 @@ export default function ProjectsPage() {
         photoCredit="Photo credit: Thingsol Songtom"
       />
 
-      <section className={s.wrap}>
+      <section className={s.offerWrap} aria-labelledby="projects-title">
         <div className="container">
-          <ul className={s.list}>
+          <header className={s.offerHead}>
+            <h2 id="projects-title" className={s.h2}>
+              Our Work in Practice
+            </h2>
+            <p className={s.intro}>
+              Our projects span farms and community landscapes, research and
+              demonstration sites, and large-scale restoration initiatives—each
+              adapted to local ecologies, livelihoods, and governance systems.
+            </p>
+          </header>
+
+          <ul className={s.cardGrid}>
             {PROJECTS.map((p) => (
               <li
                 key={p.title}
@@ -134,46 +147,45 @@ export default function ProjectsPage() {
                     src={p.image.src}
                     alt={p.image.alt}
                     fill
-                    sizes="(min-width: 980px) 320px, 100vw"
                     className={s.img}
+                    sizes="(min-width: 980px) 360px, 100vw"
                   />
                 </div>
 
-                <div className={s.content}>
-                  <h3 className={s.title}>{p.title}</h3>
+                <div className={s.cardBody}>
+                  <h3 className={s.cardTitle}>
+                    {p.cta ? (
+                      <Link className={s.cardLink} href={p.cta.href}>
+                        {p.title}
+                      </Link>
+                    ) : (
+                      p.title
+                    )}
+                  </h3>
 
-                  <ul className={s.bullets}>
-                    {p.bullets.map((b, i) => {
-                      const isPlace = !!b.location;
-                      const heading = b.location ?? b.title ?? '';
-                      return (
-                        <li key={heading || i} className={s.bullet}>
-                          <div
-                            className={`${s.bulletTitle} ${
-                              isPlace ? s.place : ''
-                            }`}
-                          >
-                            {isPlace && (
-                              <span className={s.pin} aria-hidden>
-                                <LuMapPin size={14} />
-                              </span>
-                            )}
-                            {heading}
-                          </div>
-                          {b.text ? (
-                            <p className={s.bulletText}>{b.text}</p>
-                          ) : null}
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <div className={s.rule} aria-hidden />
 
-                  {p.cta && (
-                    <a className={s.cta} href={p.cta.href}>
-                      {p.cta.label}
-                      <LuArrowRight aria-hidden className={s.ctaIcon} />
-                    </a>
-                  )}
+                  {p.bullets?.[0]?.location ? (
+                    <div className={s.eyebrow}>{p.bullets[0].location}</div>
+                  ) : null}
+
+                  {/* Short blurb: first bullet text */}
+                  {p.bullets?.[0]?.text ? (
+                    <p className={s.cardText}>{p.bullets[0].text}</p>
+                  ) : null}
+
+                  {p.cta ? (
+                    <Link
+                      className={s.learn}
+                      href={p.cta.href}
+                      aria-label={`Learn more about ${p.title}`}
+                    >
+                      {p.cta.label}{' '}
+                      <span aria-hidden className={s.chev}>
+                        ›
+                      </span>
+                    </Link>
+                  ) : null}
                 </div>
               </li>
             ))}
