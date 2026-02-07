@@ -12,7 +12,7 @@ type Props = {
 export default function GlobalCTA({
   title = 'Ready to begin your regenerative journey?',
   kicker = 'Let’s co-design solutions for your land.',
-  cta = { href: '/contact', label: 'Contact Us' },
+  cta = { href: '/contact', label: 'Get Started' },
 }: Props) {
   return (
     <section className={s.wrap} aria-labelledby="cta-title">

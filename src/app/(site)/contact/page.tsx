@@ -24,7 +24,7 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast>(null);
   const [lastPayload, setLastPayload] = useState<Record<string, string> | null>(
-    null
+    null,
   );
 
   // auto-hide toast
@@ -133,6 +133,7 @@ export default function ContactPage() {
         subtitle="We’d love to hear from you!"
         actions={[]}
         minH="56vh"
+        photoCredit="Photo credit: Thingsol Songtom"
       />
 
       <section className={s.wrap} aria-labelledby="contact-title">

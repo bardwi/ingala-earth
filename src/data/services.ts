@@ -56,6 +56,9 @@ export const services: ServiceSummary[] = [
     eyebrow: 'Context-Based Ecological Literacy',
     blurb:
       'We deliver context-based learning programs that build capacity in regenerative agriculture, ecological literacy, and climate resilience.',
-    cardImg: { src: '/services/learning.jpg', alt: 'Field training session' },
+    cardImg: {
+      src: '/services/learning-why.jpg',
+      alt: 'Field training session',
+    },
   },
 ];

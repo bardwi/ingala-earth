@@ -118,6 +118,7 @@ export default function ProjectsPage() {
         subtitle="We are proud to work across diverse landscapes and communities, bringing regenerative solutions tailored to local needs."
         actions={[]}
         minH="56vh"
+        photoCredit="Photo credit: Thingsol Songtom"
       />
 
       <section className={s.wrap}>

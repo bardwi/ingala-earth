@@ -22,6 +22,7 @@ type Props = {
   actions?: CTA[];
   scrollToId?: string;
   minH?: string;
+  photoCredit?: string | React.ReactNode;
 };
 
 export default function Hero({
@@ -31,17 +32,18 @@ export default function Hero({
   actions = [],
   scrollToId,
   minH = '84vh',
+  photoCredit,
 }: Props) {
   const objectPosition =
     image.position === 'top'
       ? '50% 0%'
       : image.position === 'bottom'
-      ? '50% 100%'
-      : image.position === 'left'
-      ? '0% 50%'
-      : image.position === 'right'
-      ? '100% 50%'
-      : '50% 50%';
+        ? '50% 100%'
+        : image.position === 'left'
+          ? '0% 50%'
+          : image.position === 'right'
+            ? '100% 50%'
+            : '50% 50%';
 
   return (
     <section className={s.wrap} style={{ minHeight: minH }}>
@@ -86,6 +88,7 @@ export default function Hero({
           <Icon name="chevron-down" size={22} />
         </a>
       )}
+      {photoCredit && <div className={s.photoCredit}>{photoCredit}</div>}
     </section>
   );
 }
