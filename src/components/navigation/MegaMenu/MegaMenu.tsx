@@ -184,7 +184,7 @@ export default function MegaMenu({
                       tabIndex={open ? 0 : -1}
                       {...linkProps}
                     >
-                      <div className={s.projThumb}>
+                      {/* <div className={s.projThumb}>
                         <Image
                           src={it.cardImg.src}
                           alt={it.cardImg.alt}
@@ -192,7 +192,7 @@ export default function MegaMenu({
                           className={s.img}
                           sizes="(min-width: 1200px) 260px, (min-width: 880px) 40vw, 80vw"
                         />
-                      </div>
+                      </div> */}
                       <div className={s.projMeta}>
                         <span className={s.projIcon} aria-hidden>
                           <ListIcon id={it.iconId ?? 'leaf'} />

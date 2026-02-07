@@ -134,6 +134,7 @@ export default function RootLayout({
         <VercelAnalytics />
         <CookieBanner />
         <ScrollTop />
+        <VercelAnalytics />
       </body>
     </html>
   );

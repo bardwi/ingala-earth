@@ -61,10 +61,10 @@
   max-width: 66ch;
 }
 .methodText {
-  font-family: var(--font-lora, 'Lora', serif);
+  font-family: var(--font-work-sans, 'Work Sans', system-ui, sans-serif);
   color: #333333;
-  line-height: 1.75;
-  font-size: 1rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
   margin: 0;
 }
 .methodText + .methodText {
@@ -124,7 +124,6 @@
   color: #333333;
   line-height: 1.65;
   font-size: 0.95rem;
-  text-align: justify;
 }
 
 /* ===== Approach two-column block ===== */
@@ -146,16 +145,7 @@
   gap: 8px;
   margin-bottom: 10px;
 }
-.kickerBadge {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: #f09d2e;
-  color: #5b1d0f;
-  flex: 0 0 auto;
-}
+
 .kickerDot {
   width: 10px;
   height: 10px;
@@ -167,7 +157,7 @@
   margin: 0;
   font-family: var(--font-lora, 'Lora', serif);
   font-weight: 600;
-  color: #5b1d0f;
+  color: #386641;
   font-size: 1rem;
 }
 .pointList {
@@ -230,7 +220,6 @@
 .processListItem {
   display: block !important;
   position: relative;
-  padding-left: 18px;
   margin-top: 16px;
 }
 
@@ -273,12 +262,6 @@
   font-size: 1.1rem;
 }
 
-.processKicker {
-  font-family: var(--font-lora, 'Lora', serif);
-  font-weight: 600;
-  color: #5b1d0f;
-}
-
 .processItemTitle {
   display: inline-flex;
   align-items: center;
@@ -305,6 +288,96 @@
   color: #333333;
   line-height: 1.6;
   font-size: 0.95rem;
+}
+
+.processWrap {
+  max-width: 500px;
+  margin: 0 auto clamp(34px, 5vw, 56px);
+  text-align: center;
+}
+
+.processHeading {
+  margin: 0 0 18px;
+  font-family: var(--font-lora, 'Lora', serif);
+  font-weight: 600;
+  color: #386641;
+  font-size: 1rem;
+}
+
+.processCards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  row-gap: 20px;
+}
+
+.processCardItem {
+  display: grid;
+
+  grid-template-columns: 48px 1fr;
+  min-height: 80px;
+  column-gap: 20px;
+  align-items: start;
+  background: rgba(106, 153, 78, 0.08); /* soft green-ish card */
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 10px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: processFadeUp 0.5s ease-out forwards;
+}
+
+@keyframes processFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.processCards > li {
+  animation-delay: calc(var(--i) * 0.5s);
+}
+.processIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  background: #f09d2e; /* orange bubble */
+  color: #5b1d0f;
+}
+
+.processIcon :global(svg) {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.processBody {
+  text-align: left;
+}
+
+.processCardTitle {
+  font-family: var(--font-lora, 'Lora', serif);
+  font-weight: 400;
+  color: #386641;
+  margin: 2px 0 6px;
+  font-size: 0.95rem;
+}
+
+.processCardText {
+  margin: 0;
+  font-family: var(--font-work-sans, 'Work Sans', system-ui, sans-serif);
+  color: #333333;
+  line-height: 1.55;
+  font-size: 0.92rem;
 }
 
 .img {
@@ -551,9 +624,10 @@
   margin: 0 0 8px;
 }
 .whyText {
-  font-family: var(--font-lora, 'Lora', serif);
-  color: #5f5f5f;
-  line-height: 1.7;
+  font-family: var(--font-work-sans, 'Work Sans', system-ui, sans-serif);
+  color: #333333;
+  line-height: 1.55;
+  font-size: 0.95rem;
 }
 .whyMedia {
   position: relative;
