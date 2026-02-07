@@ -17,6 +17,10 @@ import {
   LuUserCheck,
   LuFlaskConical,
   LuLifeBuoy,
+  LuMap,
+  LuScrollText,
+  LuBinoculars,
+  LuRefreshCcw,
 } from 'react-icons/lu';
 
 const iconForStep = (title: string) => {
@@ -36,6 +40,18 @@ const iconForStep = (title: string) => {
 
   // Fallback icon
   return LuLeaf;
+};
+
+const iconForProcess = (title: string) => {
+  const t = title.toLowerCase();
+
+  if (t.includes('assessment') || t.includes('mapping')) return LuMap;
+  if (t.includes('planning')) return LuScrollText;
+  if (t.includes('implementation')) return LuSprout;
+  if (t.includes('monitor')) return LuBinoculars;
+  if (t.includes('adapt') || t.includes('evaluate')) return LuRefreshCcw;
+
+  return LuLeaf; // fallback
 };
 
 export async function generateMetadata({
@@ -154,6 +170,10 @@ const DETAILS = {
         {
           title: 'Monitoring & Stewardship',
           text: 'Track ecological recovery, adapt strategies, and build local stewardship systems.',
+        },
+        {
+          title: 'Evaluate & Adapt',
+          text: 'Review outcomes, refine interventions and adjust restoration strategies based on ecological feedback and observed performance.',
         },
       ],
     },
@@ -337,7 +357,7 @@ function hasProcess(d: Detail): d is (typeof DETAILS)['landscape-restoration'] {
   return 'process' in d;
 }
 function hasMethodology(
-  d: Detail
+  d: Detail,
 ): d is Extract<Detail, { methodology: unknown }> {
   return 'methodology' in d;
 }
@@ -354,6 +374,9 @@ function hasSteps(d: Detail): d is (typeof DETAILS)['farmer-groups'] {
 }
 function hasWhy(d: Detail): d is Detail & WhyBlock {
   return !!d && typeof d === 'object' && 'why' in d;
+}
+function hasApproach(d: Detail): d is (typeof DETAILS)['agroecology'] {
+  return 'approach' in d;
 }
 
 export default async function ServiceDetailPage({
@@ -392,65 +415,64 @@ export default async function ServiceDetailPage({
 
           {/* Landscape image and process card */}
           {hasProcess(detail) ? (
-            <div className={s.processRow}>
-              <div className={s.methodMedia}>
-                <Image
-                  src={detail.methodology.image.src}
-                  alt={detail.methodology.image.alt}
-                  fill
-                  className={s.img}
-                  sizes="(min-width: 980px) 620px, 100vw"
-                />
-              </div>
+            <div className={s.processWrap}>
+              <h2 className={s.processHeading}>{detail.methodTitle}</h2>
 
-              <div className={s.processCard}>
-                <div className={s.processTitle}>{detail.methodTitle}</div>
+              <ul className={s.processCards}>
+                {detail.process.items.map(({ title, text }, index) => {
+                  const StepIcon = iconForProcess(title);
 
-                {/* Technique row */}
-                <div className={s.techRow}>
-                  <span className={s.techBadge} aria-hidden>
-                    <LuLeaf size={16} />
-                  </span>
-                  <div className={s.processKicker}>Technique</div>
+                  return (
+                    <li
+                      key={title}
+                      className={s.processCardItem}
+                      style={{ '--i': index } as React.CSSProperties}
+                    >
+                      <span className={s.processIcon} aria-hidden>
+                        <StepIcon size={20} />
+                      </span>
+
+                      <div className={s.processBody}>
+                        <div className={s.processCardTitle}>{title}</div>
+                        <p className={s.processCardText}>{text}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : null}
+          {hasApproach(detail) ? (
+            <>
+              <div className={s.approach}>
+                <div className={s.approachCol}>
+                  <div className={s.kickerRow}>
+                    <h3 className={s.kicker}>
+                      Our Regenerative Design Approach
+                    </h3>
+                  </div>
+
+                  <ul className={s.pointList}>
+                    {detail.approach.points.map((pt) => {
+                      const [title, rest] = pt.split('—').map((t) => t.trim());
+                      return (
+                        <li key={pt} className={s.approachItem}>
+                          <div className={s.approachItemTitle}>{title}</div>
+                          {rest && <p className={s.approachItemText}>{rest}</p>}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
 
-                <ul className={s.processList}>
-                  {detail.process.items.map(
-                    ({ title, text }: { title: string; text: string }) => (
-                      <li key={title} className={s.processListItem}>
-                        <div className={s.processItemTitle}>{title}</div>
-                        <p className={s.processItemText}>{text}</p>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-            </div>
-          ) : hasMethodology(detail) ? (
-            <>
-              <h2 className={`${s.h2} ${s.h2Inset}`}>Design Methodology</h2>
-
-              <div className={s.method}>
-                {/* Left: framed image */}
-                <figure className={s.methodMedia}>
+                <div className={s.approachMedia}>
                   <Image
-                    src={detail.methodology.image.src}
-                    alt={detail.methodology.image.alt}
+                    src={detail.approach.image.src}
+                    alt={detail.approach.image.alt}
                     fill
-                    className={`${s.img} ${s.imgContain}`}
                     sizes="(min-width: 980px) 520px, 100vw"
+                    className={s.img}
                   />
-                </figure>
-
-                {/* Right: copy with comfy line-length and paragraph breaks */}
-                <div className={s.methodCopy}>
-                  {detail.methodology.text
-                    .split(/(?<=\.)\s+(?=[A-Z])/g) // split on sentence end
-                    .map((para, i) => (
-                      <p key={i} className={s.methodText}>
-                        {para}
-                      </p>
-                    ))}
                 </div>
               </div>
             </>
@@ -474,14 +496,6 @@ export default async function ServiceDetailPage({
             <div className={s.processCard}>
               <div className={s.processTitle}>
                 {detail.offer.title ?? 'What We Offer'}
-              </div>
-
-              {/* kicker row */}
-              <div className={s.techRow}>
-                <span className={s.techBadge} aria-hidden>
-                  <LuLeaf size={16} />
-                </span>
-                <div className={s.processKicker}>Focus Area</div>
               </div>
 
               {/* list items */}
@@ -560,36 +574,29 @@ export default async function ServiceDetailPage({
               })}
             </ul>
 
-            <div className={s.approach}>
-              <div className={s.approachCol}>
-                <div className={s.kickerRow}>
-                  <span className={s.kickerBadge} aria-hidden>
-                    <LuLeaf size={16} />
-                  </span>
-                  <h3 className={s.kicker}>Our Regenerative Design Approach</h3>
-                </div>
+            <h2 className={`${s.h2} ${s.h2Inset}`}>Design Methodology</h2>
 
-                <ul className={s.pointList}>
-                  {detail.approach.points.map((pt) => {
-                    const [title, rest] = pt.split('—').map((t) => t.trim());
-                    return (
-                      <li key={pt} className={s.approachItem}>
-                        <div className={s.approachItemTitle}>{title}</div>
-                        {rest && <p className={s.approachItemText}>{rest}</p>}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-
-              <div className={s.approachMedia}>
+            <div className={s.method}>
+              {/* Left: framed image */}
+              <figure className={s.methodMedia}>
                 <Image
-                  src={detail.approach.image.src}
-                  alt={detail.approach.image.alt}
+                  src={detail.methodology.image.src}
+                  alt={detail.methodology.image.alt}
                   fill
+                  className={`${s.img} ${s.imgContain}`}
                   sizes="(min-width: 980px) 520px, 100vw"
-                  className={s.img}
                 />
+              </figure>
+
+              {/* Right: copy with comfy line-length and paragraph breaks */}
+              <div className={s.methodCopy}>
+                {detail.methodology.text
+                  .split(/(?<=\.)\s+(?=[A-Z])/g) // split on sentence end
+                  .map((para, i) => (
+                    <p key={i} className={s.methodText}>
+                      {para}
+                    </p>
+                  ))}
               </div>
             </div>
           </>
