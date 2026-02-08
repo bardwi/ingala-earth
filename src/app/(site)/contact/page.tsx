@@ -124,7 +124,7 @@ export default function ContactPage() {
     <>
       <Hero
         image={{
-          src: '/hero/rainbow.jpg',
+          src: '/images/trees.jpg',
           alt: 'Greenhouse',
           position: 'center',
           priority: true,
@@ -186,7 +186,7 @@ export default function ContactPage() {
           <div className={s.panel}>
             <div className={s.imageWrap} aria-hidden="true">
               <Image
-                src="/images/getintouch.jpg"
+                src="/images/contact.jpeg"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 520px, 100vw"
