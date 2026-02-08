@@ -9,17 +9,23 @@ type BandTone = 'ecru' | 'fog' | 'ivory';
 
 type OrgBlock = {
   title: string;
+  subtitle?: string;
   subhead?: string;
   image: { src: string; alt: string };
   points?: string[];
   reverse?: boolean;
   band?: BandTone;
   paras?: string[];
+  partner?: { name: string; href?: string };
 };
 
 type PlanGalleryBlock = {
   type: 'planGallery';
   title: string;
+  subhead?: string;
+  kickerText?: string;
+  paragraphs?: string[];
+  bullets?: string[];
   intro?: string;
   plan: { src: string; alt: string };
   thumbs: { src: string; alt: string }[];
@@ -93,7 +99,7 @@ const DETAILS: Record<string, Detail> = {
         alt: 'Nagaland site after restoration',
       },
       blurb:
-        'Our founders have designed and implemented Permaculture-based Agroforestry in 1500 acres for tribal farmers in Nagaland supported by Philanthropic funds and Government Grants. Smallest project: 200 acres and largest: 700 acres.',
+        'Our founders have designed and implemented large-scale, permaculture-based agroforestry systems across diverse tribal landscapes in Nagaland. These initiatives span projects ranging from approximately 200 acres to over 700 acres, collectively covering more than 1,500 acres. The work integrates soil regeneration, water harvesting, biodiversity enhancement, and community-led stewardship, supported through a combination of philanthropic partnerships and government programs.',
       people: [
         { src: '/projects/farm-pic-one.png', alt: 'Farmer portrait' },
         { src: '/projects/farm-pic-two.png', alt: 'Field training' },
@@ -126,6 +132,7 @@ const DETAILS: Record<string, Detail> = {
     orgBlocks: [
       {
         title: 'SankalpTaru Foundation – Uttarakhand, India',
+        subtitle: 'What We Offer',
         subhead: 'Peepal Research Centre',
         image: {
           src: '/projects/sankalptaru.jpg',
@@ -136,6 +143,8 @@ const DETAILS: Record<string, Detail> = {
           'Key focus areas: soil health, biodiversity enhancement, water conservation, and climate resilience.',
           'Serving as a model farm for research, training, and community engagement.',
         ],
+        partner: { name: 'SANKALPTARU', href: 'https://sankalptaru.org/' },
+
         band: 'fog',
       },
       {
@@ -148,14 +157,17 @@ const DETAILS: Record<string, Detail> = {
         },
         reverse: true,
         points: [
-          'Establishing a Soil Testing Lab in Tuensang as part of a larger Farm School initiative.',
-          'Functions of the lab:',
-          '🌱 Training ECS field teams in soil conservation practices.',
-          '🌱 Monitoring and validating agroecological practices.',
-          '🌱 Demonstrating regenerative impact to stakeholders.',
-          '🌱 Manufacturing bio-fertilisers and bio-pesticides.',
+          'Establishing a Bio-Resources Lab in Tuensang, Nagaland as part of a larger Farm School initiative.',
+          'Vision for the Centre:',
+          'Act as a living laboratory for hill and high-altitude agroecology, integrating indigenous knowledge with applied ecological science.',
+          'Enable farmer-led experimentation and adaptive learning to develop locally resilient regenerative systems.',
+          'Monitor and validate agroecological practices using field-based ecological and soil health indicators.',
+          'Demonstrate regenerative impact to stakeholders through credible, transparent evidence and learning outputs.',
+          'Manufacture bio-fertilisers and bio-pesticides to strengthen local bio-input sovereignty and reduce chemical dependence.',
           'Equipping local youth with hands-on skills in regenerative agriculture and soil health management.',
         ],
+        partner: { name: 'ECS', href: 'https://ecs-india.org/' },
+
         band: 'ecru',
       },
     ],
@@ -169,9 +181,10 @@ const DETAILS: Record<string, Detail> = {
     orgBlocks: [
       {
         title: 'Eleutheros Christian Society – India',
-        reverse: true,
+        subtitle: 'What We Offer',
+        reverse: false,
         image: {
-          src: '/projects/eleutheros.jpg',
+          src: '/projects/education.jpg',
           alt: 'Field workshop with ECS staff and farmers',
         },
         paras: [
@@ -183,6 +196,7 @@ const DETAILS: Record<string, Detail> = {
       },
       {
         title: 'The Breath of Earth Foundation – South Africa & Guatemala',
+        reverse: true,
         image: {
           src: '/projects/sa.jpg',
           alt: 'Hands-on practical training session',
@@ -192,6 +206,7 @@ const DETAILS: Record<string, Detail> = {
           'Our role involved designing learning modules that are both theoretically grounded and practically applicable, covering key themes such as soil regeneration, water harvesting, agroecological design, integrated land use, and ecosystem restoration.',
           'Through this partnership, we contributed to building a scalable and accessible learning framework that enables community organizations to train facilitators, engage farmers, and implement regenerative projects that are both locally relevant and globally informed.',
         ],
+        partner: { name: 'BOE FOUNDATION', href: 'https://boe.foundation/' },
         band: 'ecru',
       },
     ],
@@ -213,6 +228,20 @@ const DETAILS: Record<string, Detail> = {
           src: '/projects/garden-overview.jpg',
           alt: 'Community garden beds',
         },
+        subhead:
+          'Rainwater Harvesting & Ecological Restoration – Kagal, Maharashtra',
+        kickerText:
+          'Grow food as medicine, rooted in local ecology and community stewardship.',
+        paragraphs: [
+          'At the Primary Health Centre in Longpang, Nagaland, we established a Community Nutrition Garden to address gaps in local nutrition while strengthening the link between healthcare, ecology, and food systems. Designed using permaculture principles, the garden responds to local climatic conditions, dietary needs, and land availability, while building community ownership and long-term resilience.',
+        ],
+        bullets: [
+          'Diverse nutrition-focused cropping: Seasonal vegetables, herbs, and medicinal plants selected to support patient recovery and local dietary requirements.',
+          'Permaculture-based garden design: Polyculture beds, living mulches, and soil-cover strategies to enhance soil health and reduce maintenance inputs.',
+          'Medicinal and functional plant integration: Traditional medicinal species incorporated to support preventive and restorative healthcare practices.',
+          'Community-managed stewardship model: Local community members trained and engaged in garden management, ensuring continuity and knowledge transfer.',
+        ],
+
         thumbs: [
           {
             src: '/projects/community-garden-two.jpg',
@@ -231,7 +260,8 @@ const DETAILS: Record<string, Detail> = {
       },
       {
         type: 'twoUp',
-        title: 'Water Conservation Measures',
+        title:
+          'Rainwater Harvesting & Ecological Restoration – Kagal, Maharashtra',
         subhead:
           'Rainwater Harvesting & Ecological Restoration – Kagal, Maharashtra',
         kickerText: 'Plant water before planting trees',
@@ -262,7 +292,7 @@ const DETAILS: Record<string, Detail> = {
         title:
           'Rainwater Harvesting with Earthen Dams — Aranya Natural Farm, Andhra Pradesh, India',
         intro:
-          'The transformation of degraded land into water-secure landscapes through earthen dam construction.',
+          'This farm in Andhra Pradesh faced severe groundwater stress, with over 20 surrounding borewells having failed. Following the implementation of rainwater harvesting interventions, surface water bodies on the farm now retain water for most of the year, and groundwater levels are gradually recharging. The site is being transformed into a multi-layered food forest. Key interventions include a keyline dam, two contour ponds, and recharge from overflow structures into four borewells.',
         pairs: [
           {
             before: { src: '/projects/b1.png', alt: 'Dam site before (1)' },
@@ -353,25 +383,6 @@ export default async function ProjectDetailPage({
           </section>
         </div>
       </Band>
-      {slug === 'permaculture-regenerative-transition' && planBlock && (
-        <Band tone={planBlock.band ?? 'ecru'}>
-          <div className={container}>
-            <section>
-              <div className={s.planWrap}>
-                <div className={s.planMedia}>
-                  <Image
-                    src={planBlock.plan.src}
-                    alt={planBlock.plan.alt}
-                    fill
-                    className={`${s.img} ${s.imgContain}`}
-                    sizes="(min-width: 740px) 680px, 94vw"
-                  />
-                </div>
-              </div>
-            </section>
-          </div>
-        </Band>
-      )}
 
       {detail.nagaland && (
         <Band tone="ecru">
@@ -495,26 +506,40 @@ export default async function ProjectDetailPage({
                 </div>
 
                 <div className={s.content}>
+                  {b.subtitle && <p className={s.orgSubtitle}>{b.subtitle}</p>}
                   {b.subhead && <p className={s.orgSubhead}>{b.subhead}</p>}
-                  {b.paras?.length ? (
-                    b.paras.map((p, idx) => (
-                      <p key={idx} className={s.body}>
-                        {p}
-                      </p>
-                    ))
-                  ) : (
-                    <ul className={s.pointList}>
-                      {b.points?.map((pt) => (
-                        <li
-                          key={pt}
-                          className={
-                            pt.trim().startsWith('🌱') ? s.noDot : undefined
-                          }
+
+                  <div className={s.mainContent}>
+                    {b.paras?.length ? (
+                      b.paras.map((p, idx) => (
+                        <p key={idx} className={s.body}>
+                          {p}
+                        </p>
+                      ))
+                    ) : (
+                      <ul className={s.pointList}>
+                        {b.points?.map((pt) => (
+                          <li key={pt}>{pt}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {b.partner && (
+                    <p className={s.partner}>
+                      <span className={s.partnerLabel}>Partner:</span>{' '}
+                      {b.partner.href ? (
+                        <a
+                          href={b.partner.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
+                          {b.partner.name}
+                        </a>
+                      ) : (
+                        <span>{b.partner.name}</span>
+                      )}
+                    </p>
                   )}
                 </div>
               </article>
@@ -530,11 +555,64 @@ export default async function ProjectDetailPage({
           return (
             <Band key={block.title} tone={tone}>
               <div className={container}>
+                <div className={s.planWrap}>
+                  <div className={s.planMedia}>
+                    <Image
+                      src={block.plan.src}
+                      alt={block.plan.alt}
+                      fill
+                      className={`${s.img} ${s.imgContain}`}
+                      sizes="(min-width: 980px) 720px, 94vw"
+                    />
+                  </div>
+                </div>
+
                 <section className={s.wrap}>
                   <article className={s.planGallery}>
                     <h3 className={s.h3}>{block.title}</h3>
+                    <div className={s.read}>
+                      {block.kickerText && (
+                        <p className={s.kicker}>
+                          <span className={s.kickerLabel}>
+                            Core Principle:&nbsp;
+                          </span>
+                          <span className={s.kickerEm}>{block.kickerText}</span>
+                        </p>
+                      )}
+                    </div>
 
-                    {block.intro && <p className={s.body}>{block.intro}</p>}
+                    <p className={s.body}>
+                      Designed to support nutritional security, patient
+                      recovery, and community well-being through diversified,
+                      regenerative food production systems.
+                    </p>
+
+                    {block.paragraphs?.map((t, idx) => (
+                      <p className={s.body} key={idx}>
+                        {t}
+                      </p>
+                    ))}
+
+                    {block.bullets?.length ? (
+                      <>
+                        <p className={`${s.body} ${s.sectionLead}`}>
+                          Our interventions included:
+                        </p>
+                        <ul className={s.dotList}>
+                          {block.bullets.map((li) => (
+                            <li key={li}>{li}</li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : null}
+                    <p className={`${s.body} ${s.sectionLead}`}>
+                      Demonstration and learning site:
+                    </p>
+                    <p className={s.kickerEm}>
+                      The garden serves as a living model for integrating
+                      nutrition, ecology, and community care within rural health
+                      infrastructure.
+                    </p>
 
                     <ul className={s.thumbGrid3}>
                       {block.thumbs.map((im) => (
@@ -564,19 +642,13 @@ export default async function ProjectDetailPage({
                 <section className={s.wrap}>
                   <article className={s.section}>
                     {/*  wrapper to control */}
-                    <div className={s.twoUpCopy}>
+                    <div className={`${s.twoUpCopy} ${s.read}`}>
                       <h3 className={`${s.h3} ${s.h3Brown}`}>{block.title}</h3>
-
-                      {block.subhead && (
-                        <p className={s.subheadBrown}>{block.subhead}</p>
-                      )}
 
                       {block.kickerText && (
                         <p className={s.kicker}>
-                          <span className={s.kickerLabel}>
-                            Core Principle:&nbsp;
-                          </span>
-                          <em className={s.kickerEm}>{block.kickerText}</em>
+                          <span className={s.kickerLabel}>Core Principle:</span>
+                          <span className={s.kickerEm}>{block.kickerText}</span>
                         </p>
                       )}
 
@@ -606,7 +678,6 @@ export default async function ProjectDetailPage({
                     </div>
 
                     <div className={s.ruleDots} />
-
                     <div className={s.twoUp}>
                       <div className={s.twoUpItem}>
                         <Image
@@ -627,14 +698,6 @@ export default async function ProjectDetailPage({
                         />
                       </div>
                     </div>
-
-                    {block.caption && (
-                      <p
-                        className={`${s.caption} ${s.captionBrown} ${s.captionPill}`}
-                      >
-                        {block.caption}
-                      </p>
-                    )}
                   </article>
                 </section>
               </div>
@@ -649,7 +712,10 @@ export default async function ProjectDetailPage({
                 <section className={s.wrap}>
                   <article className={s.section}>
                     <h3 className={s.h3}>{block.title}</h3>
-                    {block.intro && <p className={s.body}>{block.intro}</p>}
+                    {block.intro && (
+                      <p className={`${s.body} ${s.read}`}>{block.intro}</p>
+                    )}
+
                     <div className={s.baRows}>
                       {block.pairs.map((p, idx2) => (
                         <div key={idx2} className={s.baRow}>
