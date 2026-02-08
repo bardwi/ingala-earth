@@ -12,8 +12,9 @@ type Props = {
 export default function GlobalCTA({
   title = 'Ready to begin your regenerative journey?',
   kicker = 'Let’s co-design solutions for your land.',
-  cta = { href: '/contact', label: 'Get Started' },
+  cta = { href: 'https://bit.ly/ingalaform', label: 'Get Started' },
 }: Props) {
+  const isExternal = /^https?:\/\//i.test(cta.href);
   return (
     <section className={s.wrap} aria-labelledby="cta-title">
       <div className="container">
@@ -24,9 +25,21 @@ export default function GlobalCTA({
 
           <div className={s.subRow}>
             {kicker && <p className={s.tagline}>{kicker}</p>}
-            <Link href={cta.href} className={s.cta}>
-              {cta.label}
-            </Link>
+
+            {isExternal ? (
+              <a
+                href={cta.href}
+                className={s.cta}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {cta.label}
+              </a>
+            ) : (
+              <Link href={cta.href} className={s.cta}>
+                {cta.label}
+              </Link>
+            )}
           </div>
         </div>
       </div>
