@@ -73,13 +73,15 @@
   grid-template-columns: 1.05fr 1fr;
   align-items: stretch;
   gap: 0;
-  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
 }
 
 .imageWrap {
   position: relative;
   min-height: 360px;
-  border-radius: 12px 0px 0px 12;
+  //border-radius: 12px 0px 0px 12;
   overflow: hidden;
 }
 .img {
@@ -127,7 +129,9 @@
   color: #6c757d;
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .form input::placeholder,
 .form textarea::placeholder {
@@ -160,7 +164,9 @@
   font-size: 0.95rem;
   border: 1px solid #386641;
   text-decoration: none;
-  transition: filter 0.15s ease, transform 0.02s ease;
+  transition:
+    filter 0.15s ease,
+    transform 0.02s ease;
   cursor: pointer;
 }
 .btn:hover {
@@ -267,10 +273,14 @@
 
 /* Left color bar via inset shadow */
 .toastSuccess .toastInner {
-  box-shadow: inset 4px 0 0 #386641, 0 12px 36px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 4px 0 0 #386641,
+    0 12px 36px rgba(0, 0, 0, 0.18);
 }
 .toastError .toastInner {
-  box-shadow: inset 4px 0 0 #b00020, 0 12px 36px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 4px 0 0 #b00020,
+    0 12px 36px rgba(0, 0, 0, 0.18);
 }
 
 .toastIcon {
