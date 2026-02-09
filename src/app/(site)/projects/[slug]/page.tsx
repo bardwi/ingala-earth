@@ -11,6 +11,7 @@ type OrgBlock = {
   title: string;
   subtitle?: string;
   subhead?: string;
+  pointsLabel?: string[];
   image: { src: string; alt: string };
   points?: string[];
   reverse?: boolean;
@@ -151,14 +152,17 @@ const DETAILS: Record<string, Detail> = {
         title: 'Eleutheros Christian Society (ECS) – Nagaland, India',
         subhead:
           'Advanced Bio-Resources Lab & Experimental Agroecology Studies',
+
         image: {
           src: '/projects/ecs-nagaland.jpg',
           alt: 'ECS bio-resources lab and training',
         },
         reverse: true,
-        points: [
+        pointsLabel: [
           'Establishing a Bio-Resources Lab in Tuensang, Nagaland as part of a larger Farm School initiative.',
           'Vision for the Centre:',
+        ],
+        points: [
           'Act as a living laboratory for hill and high-altitude agroecology, integrating indigenous knowledge with applied ecological science.',
           'Enable farmer-led experimentation and adaptive learning to develop locally resilient regenerative systems.',
           'Monitor and validate agroecological practices using field-based ecological and soil health indicators.',
@@ -444,8 +448,11 @@ export default async function ProjectDetailPage({
         <Band tone="ivory">
           <div className={container}>
             <section className={s.wrap}>
+              <h3 className={s.h3}>
+                Bamboo Agroforestry, Mpumalanga, South Africa
+              </h3>
               <article className={s.split}>
-                <div className={s.mediaTall}>
+                <figure className={s.mediaTall}>
                   <Image
                     src={detail.southAfrica.image.src}
                     alt={detail.southAfrica.image.alt}
@@ -453,11 +460,8 @@ export default async function ProjectDetailPage({
                     className={s.img}
                     sizes="(min-width: 980px) 520px, 100vw"
                   />
-                </div>
+                </figure>
                 <div className={s.content}>
-                  <h3 className={s.h3}>
-                    Bamboo Agroforestry, Mpumalanga, South Africa
-                  </h3>
                   {detail.southAfrica.paras.map((t, i) => (
                     <p className={s.body} key={i}>
                       {t}
@@ -489,13 +493,13 @@ export default async function ProjectDetailPage({
       {detail.orgBlocks?.map((b, i) => (
         <Band key={b.title} tone={b.band ?? autoTone(i)}>
           <div className={container}>
-            <section className={s.wrap}>
+            <section className={s.titleWrap}>
               <h3 className={`${s.h3} ${s.h3Center}`}>{b.title}</h3>
 
               <article
                 className={`${s.split} ${b.reverse ? s.splitReverse : ''}`}
               >
-                <div className={s.mediaTall}>
+                <figure className={s.mediaTall}>
                   <Image
                     src={b.image.src}
                     alt={b.image.alt}
@@ -503,26 +507,38 @@ export default async function ProjectDetailPage({
                     className={s.img}
                     sizes="(min-width: 980px) 520px, 100vw"
                   />
-                </div>
+                </figure>
 
                 <div className={s.content}>
                   {b.subtitle && <p className={s.orgSubtitle}>{b.subtitle}</p>}
                   {b.subhead && <p className={s.orgSubhead}>{b.subhead}</p>}
 
                   <div className={s.mainContent}>
-                    {b.paras?.length ? (
-                      b.paras.map((p, idx) => (
-                        <p key={idx} className={s.body}>
-                          {p}
-                        </p>
-                      ))
-                    ) : (
+                    {/* optional labels (only shown when present) */}
+                    {b.pointsLabel?.length
+                      ? b.pointsLabel.map((label) => (
+                          <p key={label} className={s.pointsLabel}>
+                            {label}
+                          </p>
+                        ))
+                      : null}
+
+                    {/*  if present */}
+                    {b.paras?.length
+                      ? b.paras.map((p, idx) => (
+                          <p key={idx} className={s.body}>
+                            {p}
+                          </p>
+                        ))
+                      : null}
+
+                    {b.points?.length ? (
                       <ul className={s.pointList}>
-                        {b.points?.map((pt) => (
+                        {b.points.map((pt) => (
                           <li key={pt}>{pt}</li>
                         ))}
                       </ul>
-                    )}
+                    ) : null}
                   </div>
 
                   {b.partner && (
