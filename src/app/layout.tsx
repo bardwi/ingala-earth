@@ -18,9 +18,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ingala.earth'),
   title: { default: 'Ingala Earth', template: '%s · Ingala Earth' },
-  description: 'Regenerative agroecology, biodiversity & landscape restoration',
+  description:
+    'Permaculture and regenerative land design services in Bangalore, India — ecosystem restoration, agroforestry, water harvesting, and soil regeneration.',
   manifest: '/manifest.webmanifest',
-  alternates: { canonical: 'https://ingala.earth' },
+  alternates: {
+    canonical: 'https://www.ingala.earth/permaculture-regenerative-transition',
+  },
+  keywords: [
+    'permaculture bangalore',
+    'permaculture design bangalore',
+    'regenerative agriculture bangalore',
+    'agroforestry bangalore',
+    'land restoration bangalore, India',
+  ],
   robots: {
     index: true,
     follow: true,
@@ -47,7 +57,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://ingala.earth',
+    url: 'https://www.ingala.earth',
     siteName: 'Ingala Earth',
     title: 'Ingala Earth — Regenerative Design & Ecosystem Restoration',
     description:
@@ -63,10 +73,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Ingala Earth | Regenerative Design & Ecosystem Restoration',
+    title:
+      'Ingala Earth | Regenerative Design & Ecosystem Restoration | Permaculture in Bangalore',
     description:
-      'Designing resilient ecosystems rooted in permaculture, traditional wisdom, and whole-systems thinking.',
+      'Designing resilient ecosystems rooted in permaculture, traditional wisdom, and whole-systems thinking.Regenerative land design and permaculture-based restoration services in Bangalore',
     images: ['/og/default-og.png'],
   },
 };
@@ -134,7 +144,6 @@ export default function RootLayout({
         <VercelAnalytics />
         <CookieBanner />
         <ScrollTop />
-        <VercelAnalytics />
       </body>
     </html>
   );

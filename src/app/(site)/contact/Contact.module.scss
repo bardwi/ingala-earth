@@ -2,17 +2,18 @@
 
 /* page wrap */
 .wrap {
-  background: #efe9dc33;
+  //background: #efe9dc33;
   padding: clamp(40px, 5vw, 60px) 0 clamp(72px, 8vw, 110px);
 }
 
 .infoGrid {
   list-style: none;
-  margin: 0 0 clamp(28px, 5vw, 48px);
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(16px, 2.5vw, 24px);
+  max-width: min(1100px, 92vw);
+  margin: clamp(14px, 3vw, 28px) auto 40px;
 }
 
 .card {
@@ -76,6 +77,9 @@
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
+  width: 100%;
+  max-width: min(1100px, 92vw);
+  margin-inline: auto;
 }
 
 .imageWrap {

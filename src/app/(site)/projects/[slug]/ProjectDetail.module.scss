@@ -76,7 +76,10 @@
 
 .wrap {
   background: transparent;
-  padding: clamp(46px, 7vw, 30px) 0 clamp(8px, 3.2vw, 20px);
+  padding: clamp(32px, 6vw, 72px) 0 0;
+}
+.titleWrap {
+  padding-bottom: 40px;
 }
 
 .list {
@@ -152,37 +155,38 @@
 
 /* overview */
 .centerHead {
-  max-width: 940px;
-  margin: 0 auto clamp(28px, 4vw, 40px);
+  max-width: 1100px;
+  margin: 0 auto clamp(32px, 5vw, 48px);
   text-align: center;
 }
 .h2 {
   font-family: var(--font-dm-serif, 'DM Serif Display', serif);
   font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: clamp(24px, 3vw, 30px);
   color: #6a994e;
   line-height: 1.18;
-  margin: 0 0 10px;
+  //margin: 0 0 14px;
 }
 .lead {
   color: #333;
   line-height: 1.7;
   font-size: 0.98rem;
+  text-align: left;
 }
 
 .h3 {
   font-family: var(--font-dm-serif), 'DM Serif Display', serif;
   font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: clamp(24px, 3vw, 30px);
   color: #6a994e;
-  margin: 0 0 30px;
+  margin: 30px;
   text-align: center;
 }
 .body {
   color: #333;
   line-height: 1.7;
   font-size: 0.98rem;
-  margin: 12px 0;
+  margin: 0 12px 0 0;
 }
 
 .section {
@@ -234,11 +238,14 @@
 .strip {
   list-style: none;
   margin: clamp(14px, 3vw, 20px) 0 0;
-  padding: 40px;
+  padding: 40px 0 0 0;
   display: grid;
   grid-template-columns: repeat(5, 189px);
-  justify-content: center;
+  justify-content: space-between;
   gap: var(--strip-gap, clamp(8px, 1.6vw, 14px));
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0em;
 }
 
 .stripItem {
@@ -256,9 +263,10 @@
 
 .split {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: clamp(16px, 2.6vw, 24px);
   align-items: start;
+  padding-bottom: 40px;
 }
 
 .splitReverse {
@@ -277,10 +285,12 @@
   overflow: hidden;
   border: 1px solid #efe7d9;
   background: #fff;
+  margin-top: 0;
+  margin-left: 0;
 }
-.content {
-  padding-top: 4px;
-}
+// .content {
+//   padding-top: 4px;
+// }
 
 .img {
   object-fit: cover;
@@ -293,10 +303,9 @@
 
 .nagalandBlurb {
   --strip-gap: clamp(8px, 1.6vw, 14px);
-  text-align: center;
   margin: 12px auto 0;
-  width: calc(5 * 189px + 4 * var(--strip-gap));
-  max-width: 100%;
+  //width: calc(5 * 189px + 4 * var(--strip-gap));
+  max-width: min(1100px, 92vw);
 }
 
 .pointList {
@@ -320,7 +329,7 @@
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: #d5d5d5;
+  background: #a09e9e;
 }
 
 .partner {
@@ -439,7 +448,7 @@
 }
 
 .narrow {
-  max-width: min(1020px, 92vw);
+  max-width: min(1100px, 92vw);
   margin-inline: auto;
 }
 
@@ -519,6 +528,7 @@
 .baRows {
   display: grid;
   gap: clamp(16px, 3vw, 28px);
+  padding-bottom: 40px;
 }
 .baRow {
   display: grid;
