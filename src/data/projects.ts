@@ -37,7 +37,7 @@ export const projects: Project[] = [
     summary:
       'Experience implementing recent frameworks in diverse contexts — including permaculture-led transitions.',
     cover: {
-      src: '/projects/project-design.png',
+      src: '/projects/project-design-impact-in-action.jpg',
       alt: 'Project design & impact overview',
     },
   },

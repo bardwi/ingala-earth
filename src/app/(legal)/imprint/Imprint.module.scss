@@ -57,11 +57,12 @@ $rule: #efe7d9;
 
 /* Headings */
 .h2 {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   color: $green-500;
   font-family: var(--font-lora, 'Lora', serif);
   font-weight: 700;
   font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.18;
 }
 
 /* Body & links */
