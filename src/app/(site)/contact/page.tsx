@@ -133,7 +133,7 @@ export default function ContactPage() {
         subtitle="We’d love to hear from you!"
         actions={[]}
         minH="56vh"
-        photoCredit="Photo credit: Thingsol Songtom"
+        photoCredit="Photo credit: Thingtsa Sangtam"
       />
 
       <section className={s.wrap} aria-labelledby="contact-title">
