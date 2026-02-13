@@ -403,7 +403,7 @@ export default async function ServiceDetailPage({
         subtitle={detail.heroKicker}
         actions={[]}
         minH="56vh"
-        photoCredit="Photo credit: Thingsol Songtom"
+        photoCredit="Photo credit: Thingtsa Sangtam"
       />
 
       <section className={s.wrap}>

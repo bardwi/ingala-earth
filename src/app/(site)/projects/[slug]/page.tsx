@@ -364,7 +364,7 @@ export default async function ProjectDetailPage({
           subtitle={detail.heroSubtitle}
           actions={[]}
           minH="60vh"
-          photoCredit="Photo credit: Thingsol Songtom"
+          photoCredit="Photo credit: Thingtsa Sangtam"
         />
         {hasImpact && (
           <div className={s.heroOverlay}>

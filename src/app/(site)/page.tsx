@@ -4,7 +4,6 @@ import Expertise from '@/components/marketing/Expertise/Expertise';
 import Icon from '@/components/ui/Icon/Icon';
 import ProjectsSlider from '@/components/sections/ProjectsSlider/ProjectsSlider';
 import type { ProjectCard } from '@/components/sections/ProjectsSlider/ProjectsSlider';
-import Link from 'next/link';
 import { projects } from '@/data/projects';
 import Footprint from '@/components/sections/Footprint/Footprint';
 
@@ -32,7 +31,7 @@ export default function Home() {
         ]}
         scrollToId="mission"
         minH="75vh"
-        photoCredit="Photo credit: Thingsol Songtom"
+        photoCredit="Photo credit: Thingtsa Sangtam"
       />
 
       <Mission
