@@ -7,7 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "spell": "cspell lint 'src/**/*.{ts,tsx,js,jsx,scss,md}' || true"
+    "spell": "cspell lint 'src/**/*.{ts,tsx,js,jsx,scss,md}' || true",
+    "compress-images": "node scripts/compress-images.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     'Permaculture and regenerative land design services in Bangalore, India — ecosystem restoration, agroforestry, water harvesting, and soil regeneration.',
   manifest: '/manifest.webmanifest',
   alternates: {
-    canonical: 'https://www.ingala.earth/permaculture-regenerative-transition',
+    canonical: '/',
   },
   keywords: [
     'permaculture bangalore',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://www.ingala.earth',
+    url: '/',
     siteName: 'Ingala Earth',
     title: 'Ingala Earth — Regenerative Design & Ecosystem Restoration',
     description:
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/og/default-og.jpg',
+        url: '/og/default-og.png',
         width: 1200,
         height: 630,
         alt: 'Ingala Earth regenerative landscape',
@@ -73,6 +73,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: 'summary_large_image',
     title:
       'Ingala Earth | Regenerative Design & Ecosystem Restoration | Permaculture in Bangalore',
     description:
