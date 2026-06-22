@@ -80,7 +80,7 @@ export async function generateMetadata({
 
   const description = detail.overview.slice(0, 155);
   const url = `/services/${slug}`;
-  const ogImage = '/og/default.jpg';
+  const ogImage = '/og/default-og.png';
 
   return {
     title: svc.title,
